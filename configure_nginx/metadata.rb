@@ -1,0 +1,8 @@
+name              'configure_nginx'
+maintainer        'FlagshipPromotions'
+maintainer_email  'maintainer@flagshoppromotions.com'
+license           'Unknown'
+description       'Configures nginx'
+version           '0.0.1'
+depends           'sslmate'
+recipe            'configure_nginx', 'Configures nginx'

@@ -1,0 +1,26 @@
+server {
+    listen 80;
+    listen 443 ssl;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_ciphers 'AES256+EECDH:AES256+EDH';
+    ssl_certificate     /etc/nginx/ssl/<%= node[:fqdn].gsub('-', '.') %>.chained.crt;
+    ssl_certificate_key /etc/nginx/ssl/<%= node[:fqdn].gsub('-', '.') %>.key;
+
+    server_name <%= node[:fqdn].gsub('-', '.') %> www.<%= node[:fqdn].gsub('-', '.') %>;
+
+    root /home/ec2-user/www;
+
+    location ~ \.php$ {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        include        /etc/nginx/fastcgi_params;
+        fastcgi_param  ENVIRONMENT          production;
+        fastcgi_param  HTTP_REFERER         $http_referer;
+        fastcgi_param  SCRIPT_FILENAME      $document_root$fastcgi_script_name;
+        fastcgi_param  HTTP_X_FORWARDED_FOR $http_x_forwarded_for;
+        fastcgi_pass_header Set-Cookie;
+        fastcgi_pass_header Cookie;
+    }
+}

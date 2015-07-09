@@ -30,6 +30,6 @@ cron 'download_ssl_cert' do
   mailto 'root'
   home '/root'
   command <<-EOH
-    /usr/bin/sslmate download #{hostname}; [ $? -eq 0 ] && /sbin/service nginx reload
+    /usr/bin/sslmate download #{hostname} >/dev/null 2>&1; [ $? -eq 0 ] && /sbin/service nginx reload
   EOH
 end

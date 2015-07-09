@@ -25,11 +25,11 @@ end
 
 # set up cron job to check for certificate readiness and download it when it's ready
 cron 'download_ssl_cert' do
-  minute '*/5'
+  minute '*'
   user 'root'
   mailto 'root'
   home '/root'
   command <<-EOH
-    /usr/bin/sslmate download #{hostname}; [ $? -ne 0 ] && /sbin/service nginx reload
+    /usr/bin/sslmate download #{hostname}; [ $? -eq 0 ] && /sbin/service nginx reload
   EOH
 end

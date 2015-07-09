@@ -1,5 +1,5 @@
 # replace dash in fqdn to get domain name to work with
-hostname = node[:fqdn].gsub('-', '.')
+hostname = node[:hostname].gsub('-', '.')
 
 # configure sslmate
 template '/etc/sslmate.conf' do

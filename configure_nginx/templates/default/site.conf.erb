@@ -5,10 +5,10 @@ server {
     ssl_prefer_server_ciphers on;
     ssl_session_cache shared:SSL:10m;
     ssl_ciphers 'AES256+EECDH:AES256+EDH';
-    ssl_certificate     /etc/nginx/ssl/<%= node[:fqdn].gsub('-', '.') %>.chained.crt;
-    ssl_certificate_key /etc/nginx/ssl/<%= node[:fqdn].gsub('-', '.') %>.key;
+    ssl_certificate     /etc/nginx/ssl/<%= node[:hostname].gsub('-', '.') %>.chained.crt;
+    ssl_certificate_key /etc/nginx/ssl/<%= node[:hostname].gsub('-', '.') %>.key;
 
-    server_name <%= node[:fqdn].gsub('-', '.') %> www.<%= node[:fqdn].gsub('-', '.') %>;
+    server_name <%= node[:hostname].gsub('-', '.') %> www.<%= node[:hostname].gsub('-', '.') %>;
 
     root /home/ec2-user/www;
 

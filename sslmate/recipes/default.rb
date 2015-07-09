@@ -1,6 +1,15 @@
 # replace dash in fqdn to get domain name to work with
 hostname = node[:fqdn].gsub('-', '.')
 
+# configure sslmate
+template '/etc/sslmate.conf' do
+  force_unlink true
+  source 'sslmate.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
+end
+
 # issue SSL cert
 execute 'buy_ssl_cert' do
   guard = <<-EOH

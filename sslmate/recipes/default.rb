@@ -1,5 +1,6 @@
-# replace dash in fqdn to get domain name to work with
-hostname = node[:hostname].gsub('-', '.')
+# replace hostname's last dash with dot;
+# reverse server's hostname, then replace first dash, then reverse result again
+domain = node[:hostname].reverse.sub('-', '.').reverse
 
 # configure sslmate
 template '/etc/sslmate.conf' do
@@ -13,12 +14,12 @@ end
 # issue SSL cert
 execute 'buy_ssl_cert' do
   guard = <<-EOH
-    sslmate list | grep #{hostname}
+    sslmate list | grep #{domain}
   EOH
 
   user 'root'
   command <<-EOH
-    sslmate --batch buy --temp --email=admin@#{hostname} #{hostname}
+    sslmate --batch buy --temp --email=admin@#{domain} #{domain}
   EOH
   not_if guard
 end
@@ -30,6 +31,6 @@ cron 'download_ssl_cert' do
   mailto 'root'
   home '/root'
   command <<-EOH
-    /usr/bin/sslmate download #{hostname} >/dev/null 2>&1; [ $? -eq 0 ] && /sbin/service nginx reload
+    /usr/bin/sslmate download #{domain} >/dev/null 2>&1; [ $? -eq 0 ] && /sbin/service nginx reload
   EOH
 end

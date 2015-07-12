@@ -5,5 +5,3 @@ license           'Unknown'
 description       'Issues SSL certs using sslmate'
 version           '0.0.2'
 recipe            'sslmate', 'Issues SSL certs'
-
-depends           'yum'

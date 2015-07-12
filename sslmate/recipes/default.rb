@@ -18,7 +18,6 @@ domain = node[:hostname].reverse.sub('-', '.').reverse
 
 # configure sslmate
 template '/etc/sslmate.conf' do
-  force_unlink true
   source 'sslmate.conf.erb'
   owner 'root'
   group 'root'

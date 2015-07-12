@@ -1,4 +1,9 @@
 #
+chef_gem "aws-sdk" do
+  compile_time false
+  action :install
+end
+
 require 'aws-sdk'
 
 # gather EC2 metadata

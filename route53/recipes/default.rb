@@ -3,10 +3,10 @@ chef_gem 'aws-sdk' do
   compile_time false if respond_to?(:compile_time)
   action :install
 end
+chef_gem 'aws-sdk'
 
 ruby_block "create_hosted_zone" do
   block do
-    chef_gem 'aws-sdk'
     require 'aws-sdk'
 
     # gather EC2 metadata

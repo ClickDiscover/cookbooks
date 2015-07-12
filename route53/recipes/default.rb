@@ -18,7 +18,7 @@ end
     domain = node[:hostname].reverse.sub('-', '.').reverse
 
     # initialize Route53 connection; region isn't important
-    route53 = Aws::Route53::Client.new(
+    route53 = AWS::Route53::Client.new(
       region: 'us-east-1',
       access_key_id: node[:route53][:access_key],
       secret_access_key: node[:route53][:secret_access_key]

@@ -4,7 +4,7 @@ chef_gem 'aws-sdk' do
   action :install
 end
 
-ruby_block "download-object" do
+ruby_block "create_hosted_zone" do
   block do
     require 'aws-sdk'
 

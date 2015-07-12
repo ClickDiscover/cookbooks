@@ -1,3 +1,8 @@
+# install nginx
+yum_package 'nginx' do
+  action :install
+end
+
 # define nginx system service
 service 'nginx' do
   service_name 'nginx'

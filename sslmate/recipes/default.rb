@@ -1,7 +1,7 @@
 # add SSLMate repository
 yum_repository 'sslmate' do
   description 'Zenoss Stable repo'
-  baseurl 'http://packages.sslmate.com/centos/$releasever/main/$basearch'
+  baseurl 'http://packages.sslmate.com/centos/6/main/$basearch'
   gpgkey 'https://sslmate.com/yum/centos/RPM-GPG-KEY-SSLMate'
   action :create
 end

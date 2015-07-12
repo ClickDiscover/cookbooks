@@ -1,0 +1,7 @@
+name              'route53'
+maintainer        'FlagshipPromotions'
+maintainer_email  'maintainer@flagshoppromotions.com'
+license           'Unknown'
+description       'Manages Route53'
+version           '0.1.0'
+recipe            'route53', 'Manages'

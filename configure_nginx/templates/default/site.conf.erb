@@ -1,5 +1,6 @@
 server {
     listen 80;
+<% if node['configure_nginx']['use_ssl'] %>
     listen 443 ssl;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_prefer_server_ciphers on;
@@ -7,6 +8,7 @@ server {
     ssl_ciphers 'AES256+EECDH:AES256+EDH';
     ssl_certificate     /etc/nginx/ssl/<%= @domain %>.chained.crt;
     ssl_certificate_key /etc/nginx/ssl/<%= @domain %>.key;
+<% end %>
 
     server_name <%= @domain %> www.<%= @domain %>;
 

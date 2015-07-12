@@ -12,6 +12,15 @@ yum_package 'sslmate' do
   flush_cache [ :before ]
 end
 
+# ensure ssl directory exists
+directory "#{node[:sslmate][:ssldir]}" do
+  mode '0770'
+  owner 'root'
+  group 'root'
+  action :create
+  recursive true
+end
+
 # replace hostname's last dash with dot;
 # reverse server's hostname, then replace first dash, then reverse result again
 domain = node[:hostname].reverse.sub('-', '.').reverse

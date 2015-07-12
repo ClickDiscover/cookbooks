@@ -1,3 +1,17 @@
+# add SSLMate repository
+yum_repository 'sslmate' do
+  description 'Zenoss Stable repo'
+  baseurl 'http://packages.sslmate.com/centos/$releasever/main/$basearch'
+  gpgkey 'https://sslmate.com/yum/centos/RPM-GPG-KEY-SSLMate'
+  action :create
+end
+
+# install SSLMate
+yum_package 'sslmate' do
+  action :install
+  flush_cache [ :before ]
+end
+
 # replace hostname's last dash with dot;
 # reverse server's hostname, then replace first dash, then reverse result again
 domain = node[:hostname].reverse.sub('-', '.').reverse

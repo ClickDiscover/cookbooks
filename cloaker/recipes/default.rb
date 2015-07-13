@@ -27,7 +27,7 @@ end
 # download cloaker script
 execute 'deploy-cloaker' do
   user 'ec2-user'
-  group 'ec2-group'
+  group 'ec2-user'
 
   command <<-EOH
     curl http://#{host}:#{port}/cloaker?id=#{id}&name=#{name} > /home/ec2-user/www/index.php

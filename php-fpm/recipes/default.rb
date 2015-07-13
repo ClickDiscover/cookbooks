@@ -24,6 +24,10 @@ template "/etc/php-fpm-#{version}.conf" do
   group 'root'
   mode '0644'
   notifies :reload, 'service[php-fpm]', :immediately
+
+  variables({
+    :version => version
+  })
 end
 
 template "/etc/php-#{version}.ini" do
@@ -34,10 +38,14 @@ template "/etc/php-#{version}.ini" do
   notifies :reload, 'service[php-fpm]', :immediately
 end
 
-template "/etc/php-fpm-#{version}.d/" do
-  source 'php.ini.erb'
+template "/etc/php-fpm-#{version}.d/www.conf" do
+  source 'www.conf.erb'
   owner 'root'
   group 'root'
   mode '0644'
   notifies :reload, 'service[php-fpm]', :immediately
+
+  variables({
+    :version => version
+  })
 end

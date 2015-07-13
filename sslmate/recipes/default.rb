@@ -12,6 +12,22 @@ yum_package 'sslmate' do
   flush_cache [ :before ]
 end
 
+# configure aws credentials
+directory '/root/.aws' do
+  owner 'root'
+  group 'root'
+  mode '0700'
+  action :create
+end
+
+template '/root/.aws/credentials' do
+  source 'aws_credentials.erb'
+  owner 'root'
+  group 'root'
+  action :create
+  mode '0400'
+end
+
 # ensure ssl directory exists
 directory "#{node[:sslmate][:ssldir]}" do
   mode '0770'
@@ -41,7 +57,7 @@ execute 'buy_ssl_cert' do
 
   user 'root'
   command <<-EOH
-    sslmate --batch buy --temp --email=admin@#{domain} #{domain}
+    sslmate --batch buy --temp --approval=dns #{domain}
   EOH
   not_if guard
 end

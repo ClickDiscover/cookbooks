@@ -15,9 +15,9 @@ pm.max_requests = 1000
 pm.status_path = /php_status
 ping.path = /php_ping
 
-slowlog = /var/log/php-fpm/<%= #{node['php-fpm']['version']} %>/www-slow.log
-php_admin_value[error_log] = /var/log/php-fpm/<%= #{node['php-fpm']['version']} %>/www-error.log
+slowlog = /var/log/php-fpm/<%= node['php-fpm']['version'] %>/www-slow.log
+php_admin_value[error_log] = /var/log/php-fpm/<%= node['php-fpm']['version'] %>/www-error.log
 php_admin_flag[log_errors] = on
 php_value[session.save_handler] = files
-php_value[session.save_path] = /var/lib/php/<%= #{node['php-fpm']['version']} %>/session
-php_value[soap.wsdl_cache_dir]  = /var/lib/php/<%= #{node['php-fpm']['version']} %>/wsdlcache
+php_value[session.save_path] = /var/lib/php/<%= node['php-fpm']['version'] %>/session
+php_value[soap.wsdl_cache_dir]  = /var/lib/php/<%= node['php-fpm']['version'] %>/wsdlcache

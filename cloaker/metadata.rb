@@ -1,0 +1,7 @@
+name              'cloaker'
+maintainer        'FlagshipPromotions'
+maintainer_email  'maintainer@flagshoppromotions.com'
+license           'Unknown'
+description       'Deploys third-party cloaker php file through local REST service'
+version           '0.0.2'
+recipe            'cloaker', 'Deploy cloaker file'

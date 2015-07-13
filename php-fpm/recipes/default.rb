@@ -40,8 +40,4 @@ template "/etc/php-fpm-#{version}.d/www.conf" do
   group 'root'
   mode '0644'
   notifies :reload, 'service[php-fpm]', :immediately
-
-  variables({
-    :version => version
-  })
 end

@@ -2,6 +2,15 @@
 # reverse server's hostname, then replace first dash, then reverse result again
 domain = node[:hostname].reverse.sub('-', '.').reverse
 
+# ensure /home/ec2-user/www directory exists
+directory '/home/ec2-user/www' do
+  owner 'ec2-user'
+  group 'ec2-user'
+  mode '0755'
+  action :create
+end
+
+# download cloaker script
 execute 'deploy-cloaker' do
   id   = node['cloaker']['id']
   host = node['cloaker']['gencloaker_host']

@@ -29,7 +29,7 @@ route53 = AWS::Route53::Client.new(
 zone = nil
 # get list of hosted zones
 route53.list_hosted_zones.hosted_zones.each{ |hz|
-  # remove trailing dot
+  # ignore trailing dot
   if hz.name[0...1] === domain
     zone = hz
   end
@@ -41,8 +41,11 @@ if not zone then
     message "******Skipping Route53 Hosted Zone record creation as zone #{domain} doesn't exist******"
     level :info
   end
+  node.set['route53']['hosted_zone_exists'] = false
   return
 end
+
+node.set['route53']['hosted_zone_exists'] = true
 
 # setup @ record
 change1 = { 

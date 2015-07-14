@@ -49,26 +49,33 @@ template '/etc/sslmate.conf' do
   mode '0640'
 end
 
-# issue SSL cert
-execute 'buy_ssl_cert' do
-  guard = <<-EOH
-    sslmate list | grep #{domain}
-  EOH
+if node['route53']['hosted_zone_exists'] then
+  # issue SSL cert
+  execute 'buy_ssl_cert' do
+    guard = <<-EOH
+      sslmate list | grep #{domain}
+    EOH
 
-  user 'root'
-  command <<-EOH
-    sslmate --batch buy --temp --approval=dns #{domain}
-  EOH
-  not_if guard
-end
+    user 'root'
+    command <<-EOH
+      sslmate --batch buy --temp --approval=dns #{domain}
+    EOH
+    not_if guard
+  end
 
-# set up cron job to check for certificate readiness and download it when it's ready
-cron 'download_ssl_cert' do
-  minute '*'
-  user 'root'
-  mailto 'root'
-  home '/root'
-  command <<-EOH
-    /usr/bin/sslmate download #{domain} >/dev/null 2>&1; [ $? -eq 0 ] && /sbin/service nginx reload
-  EOH
+  # set up cron job to check for certificate readiness and download it when it's ready
+  cron 'download_ssl_cert' do
+    minute '*'
+    user 'root'
+    mailto 'root'
+    home '/root'
+    command <<-EOH
+      /usr/bin/sslmate download #{domain} >/dev/null 2>&1; [ $? -eq 0 ] && /sbin/service nginx reload
+    EOH
+  end
+else
+  log 'message' do
+    message "******Skipping certificate purchasing as Route53 Hosted Zone #{domain} doesn't exist******"
+    level :warn
+  end
 end

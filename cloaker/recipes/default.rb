@@ -33,6 +33,6 @@ execute 'deploy-cloaker' do
   group 'ec2-user'
 
   command <<-EOH
-    /usr/bin/wget -O/home/ec2-user/www/index.php "http://#{host}:#{port}/cloaker?id=#{id}&name=#{name}"
+    /usr/bin/wget --timeout=10 -t 3 -O/home/ec2-user/www/index.php "http://#{host}:#{port}/cloaker?id=#{id}&name=#{name}"
   EOH
 end

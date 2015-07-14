@@ -36,7 +36,13 @@ route53.list_hosted_zones.hosted_zones.each{ |hz|
 }
 
 # don't proceed if there's no hosted zone for configured domain
-return if not zone
+if not zone then
+  log 'message' do
+    message "******Skipping Route53 Hosted Zone record creation as zone #{domain} doesn't exist******"
+    level :info
+  end
+  return
+end
 
 # setup @ record
 change1 = { 

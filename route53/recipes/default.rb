@@ -75,6 +75,6 @@ change2 = {
 
 # create @ and www records
 route53.change_resource_record_sets(
-  hosted_zone_id: zone.hosted_zone.id,
+  hosted_zone_id: zone.id,
   change_batch: {changes: [change1, change2]}
 )

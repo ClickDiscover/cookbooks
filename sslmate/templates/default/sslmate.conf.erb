@@ -4,4 +4,6 @@
 api_key <%= node['sslmate']['api_key'] %>
 key_directory <%= node['sslmate']['key_directory'] %>
 cert_directory <%= node['sslmate']['cert_directory'] %>
-api_endpoint <%= node['sslmate']['api_endpoint'] %>
+<% if node['sslmate']['sandbox'] %>
+api_endpoint https://sandbox.sslmate.com/api/v2
+<% end %>

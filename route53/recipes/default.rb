@@ -38,7 +38,7 @@ route53.list_hosted_zones.hosted_zones.each{ |hz|
 # don't proceed if there's no hosted zone for configured domain
 if not zone then
   log 'message' do
-    message "******Skipping Route53 Hosted Zone record creation as zone #{domain} doesn't exist******"
+    message "******Skipping Route53 Hosted Zone record creation: Zone #{domain} doesn't exist******"
     level :info
   end
   node.set['route53']['hosted_zone_exists'] = false
@@ -76,5 +76,8 @@ begin
     change_batch: {changes: [change1, change2]}
   )
 rescue AWS::Route53::Errors::InvalidChangeBatch
-  message "******Skipping Route53 Hosted Zone record creation: it seems the required records are already in place******"
+  log 'message' do
+    message "******Skipping Route53 Hosted Zone record creation: it seems the required records are already in place******"
+    level :warn
+  end
 end

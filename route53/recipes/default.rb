@@ -34,7 +34,7 @@ route53.list_hosted_zones.hosted_zones.each{ |hz|
     level :info
   end
   # ignore trailing dot
-  if hz.name[0...1] === domain
+  if hz.name[0...1] == domain
     zone = hz
   end
 }

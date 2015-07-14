@@ -29,6 +29,10 @@ route53 = AWS::Route53::Client.new(
 zone = nil
 # get list of hosted zones
 route53.list_hosted_zones.hosted_zones.each{ |hz|
+  log 'message' do
+    message "******Found Route53 Hosted Zone #{hz.name}******"
+    level :info
+  end
   # ignore trailing dot
   if hz.name[0...1] === domain
     zone = hz

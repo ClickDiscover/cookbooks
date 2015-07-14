@@ -92,6 +92,15 @@ http {
             allow 127.0.0.1;
             deny all;
         }
+
+        location ~ ^/php_(status|ping)$ {
+            access_log off;
+            allow 127.0.0.1;
+            deny all;
+            include /etc/nginx/fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
+            fastcgi_pass 127.0.0.1:9000;
+        }
     }
 
     include "/etc/nginx/conf.d/*.conf";

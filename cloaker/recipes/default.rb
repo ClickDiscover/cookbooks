@@ -1,3 +1,6 @@
+# don't proceed if id isn't set
+return if not node['cloaker']['id']
+
 # replace hostname's last dash with dot;
 # reverse server's hostname, then replace first dash, then reverse result again
 domain = node[:hostname].reverse.sub('-', '.').reverse

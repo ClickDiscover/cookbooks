@@ -70,7 +70,11 @@ change2 = {
 }
 
 # create @ and www records
-route53.change_resource_record_sets(
-  hosted_zone_id: zone.id,
-  change_batch: {changes: [change1, change2]}
-)
+begin
+  route53.change_resource_record_sets(
+    hosted_zone_id: zone.id,
+    change_batch: {changes: [change1, change2]}
+  )
+rescue AWS::Route53::Errors::InvalidChangeBatch
+  message "******Skipping Route53 Hosted Zone record creation: it seems the required records are already in place******"
+end

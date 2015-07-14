@@ -33,6 +33,6 @@ execute 'deploy-cloaker' do
   group 'ec2-user'
 
   command <<-EOH
-    curl http://#{host}:#{port}/cloaker?id=#{id}&name=#{name} > /home/ec2-user/www/index.php
+    /usr/bin/wget -O/home/ec2-user/www/index.php "http://#{host}:#{port}/cloaker?id=#{id}&name=#{name}"
   EOH
 end

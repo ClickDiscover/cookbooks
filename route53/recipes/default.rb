@@ -16,18 +16,27 @@ route53 = AWS::Route53::Client.new(
   secret_access_key: node[:route53][:secret_access_key]
 )
 
+##########################################################
+# Automatic Route53 Hosted Zone creation disabled for now
+##########################################################
+# stop if zone already exists
+# return if hosted_zones.include?(domain)
+#
+# create Route53 hosted zone
+# zone = route53.create_hosted_zone(name: domain, caller_reference: public_ipv4)
+##########################################################
+#
+zone = nil
 # get list of hosted zones
-hosted_zones = []
 route53.list_hosted_zones.hosted_zones.each{ |hz|
   # remove trailing dot
-  hosted_zones.push(hz.name[0...-1])
+  if hz.name[0...1] === domain
+    zone = hz
+  end
 }
 
-# stop if zone already exists
-return if hosted_zones.include?(domain)
-
-# create Route53 hosted zone
-zone = route53.create_hosted_zone(name: domain, caller_reference: public_ipv4)
+# don't proceed if there's no hosted zone for configured domain
+return if not zone
 
 # setup @ record
 change1 = { 

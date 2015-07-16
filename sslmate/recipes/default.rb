@@ -79,3 +79,8 @@ else
     level :warn
   end
 end
+
+# remove AWS credentials for security reasons
+file '/root/.aws/credentials' do
+  action :delete
+end

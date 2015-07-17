@@ -19,7 +19,7 @@ end
 
 # fix session dir permissions
 directory "/var/lib/php/#{version}/session/" do
-  owner root
+  owner 'root'
   group node['php-fpm']['group']
   mode '0770'
   action :create

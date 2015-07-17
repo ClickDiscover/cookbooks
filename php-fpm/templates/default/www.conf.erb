@@ -4,8 +4,8 @@
 [www]
 listen = 127.0.0.1:9000
 listen.allowed_clients = 127.0.0.1
-user = nginx
-group = nginx
+user = <%= node['php-fpm']['user'] %>
+group = <%= node['php-fpm']['group'] %>
 pm = dynamic
 pm.max_children = 25
 pm.start_servers = 2

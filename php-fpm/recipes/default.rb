@@ -17,6 +17,14 @@ service 'php-fpm' do
   action [:enable, :start]
 end
 
+# fix session dir permissions
+directory "/var/lib/php/#{version}/session/" do
+  owner root
+  group node['php-fpm']['group']
+  mode '0770'
+  action :create
+end
+
 # configure PHP-FPM
 template "/etc/php-fpm-#{version}.conf" do
   source 'php-fpm.conf.erb'

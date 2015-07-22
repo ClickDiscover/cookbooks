@@ -1,0 +1,41 @@
+#
+LoadPlugin curl_xml
+TypesDB "/etc/collectd.d/php-fpm.types.db"
+<Plugin curl_xml>
+  <URL "http://localhost/php_status?xml">
+    Instance "fpm"
+
+    <XPath "/status">
+      Type "accepted_conn"
+      ValuesFrom "accepted-conn/text()"
+    </XPath>
+    <XPath "/status">
+      Type "listen_queue_len"
+      ValuesFrom "listen-queue-len/text()"
+    </XPath>
+    <XPath "/status">
+      Type "idle_processess"
+      ValuesFrom "idle-processes/text()"
+    </XPath>
+    <XPath "/status">
+      Type "active_processess"
+      ValuesFrom "active-processes/text()"
+    </XPath>
+    <XPath "/status">
+      Type "total_processes"
+      ValuesFrom "total-processes/text()"
+    </XPath>
+    <XPath "/status">
+      Type "max_active_processes"
+      ValuesFrom "max-active-processes/text()"
+    </XPath>
+    <XPath "/status">
+      Type "max_children_reached"
+      ValuesFrom "max-children-reached/text()"
+    </XPath>
+    <XPath "/status">
+      Type "slow_requests"
+      ValuesFrom "slow-requests/text()"
+    </XPath>
+  </URL>
+</Plugin>

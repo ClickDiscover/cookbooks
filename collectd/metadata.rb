@@ -1,0 +1,7 @@
+name              'collectd'
+maintainer        'FlagshipPromotions'
+maintainer_email  'maintainer@flagshoppromotions.com'
+license           'Unknown'
+description       'Configures collectd'
+version           '0.3.0'
+recipe            'collectd', 'Installs collectd'

@@ -1,0 +1,30 @@
+#
+# Config file for collectd(1).
+# Please read collectd.conf(5) for a list of options.
+# http://collectd.org/
+#
+
+Hostname    "<%= node[:hostname] %>"
+#FQDNLookup   true
+#BaseDir     "/var/lib/collectd"
+#PIDFile     "/var/run/collectd.pid"
+#PluginDir   "/usr/lib64/collectd"
+TypesDB     "/usr/share/collectd/types.db"
+
+LoadPlugin syslog
+LoadPlugin cpu
+LoadPlugin interface
+LoadPlugin load
+LoadPlugin memory
+LoadPlugin write_http
+
+Include "/etc/collectd.d"
+
+
+<Plugin write_http>
+  <URL "https://collectd.librato.com/v1/measurements">
+    User "<%= node[:librato][:email] %>"
+    Password "<%= node[:librato][:api_key] %>"
+    Format "JSON"
+  </URL>
+</Plugin>

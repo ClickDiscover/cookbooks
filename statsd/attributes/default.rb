@@ -12,3 +12,24 @@ default['statsd']['graphite_enabled'] = false
 default['statsd']['extra_config'] = {
   'librato' => default['librato']
 }
+
+default['statsd']['repo'] = 'https://github.com/etsy/statsd.git'
+default['statsd']['version'] = 'v0.7.2'
+default['statsd']['log_file'] = '/var/log/statsd.log'
+default['statsd']['config_dir'] = '/etc/statsd'
+default['statsd']['pid_dir'] = '/var/run/statsd'
+default['statsd']['pid_file'] = '/var/run/statsd/statsd.pid'
+default['statsd']['path'] = '/usr/share/statsd'
+default['statsd']['user'] = 'statsd'
+default['statsd']['group'] = 'statsd'
+default['statsd']['flush_interval_msecs'] = 10_000
+default['statsd']['port'] = 8125
+
+# Enable console output
+default['statsd']['console_enabled'] = false
+
+default['statsd']['service'] = {
+  enable: true,
+  start: true
+}
+

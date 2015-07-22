@@ -1,0 +1,7 @@
+name              'statsd'
+maintainer        'FlagshipPromotions'
+maintainer_email  'maintainer@flagshoppromotions.com'
+license           'Unknown'
+description       'Configures nginx'
+version           '0.3.0'
+recipe            'statsd', 'Configures statsd with librato'

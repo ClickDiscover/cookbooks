@@ -10,7 +10,7 @@ default['statsd']['graphite_enabled'] = false
 # Add any additional backend configuration here.
 #
 default['statsd']['extra_config'] = {
-  'librato' => default['librato']
+  'librato' => node['librato']
 }
 
 default['statsd']['repo'] = 'https://github.com/etsy/statsd.git'

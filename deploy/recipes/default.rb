@@ -15,7 +15,7 @@ node[:deploy].each do |application, deploy|
 end
 
 # configure Centrifuge
-template '/srv/www/centrifuge/current/Centrifuge/config.php' do
+template '/srv/www/centrifuge/current/config.php' do
   source 'centrifuge.config.php.erb'
   owner node[:opsworks][:deploy_user][:user]
   group node[:opsworks][:deploy_user][:group]
@@ -23,8 +23,8 @@ template '/srv/www/centrifuge/current/Centrifuge/config.php' do
 end
 
 # symlink static files
-link '/srv/www/centrifuge/current/Centrifuge-Landers/static' do
-  to '/srv/www/centrifuge/current/Centrifuge/static'
+link '/srv/www/centrifuge-landers/current/static' do
+  to '/srv/www/centrifuge/current/static'
   ignore_failure true
   owner node[:opsworks][:deploy_user][:user]
   group node[:opsworks][:deploy_user][:group]

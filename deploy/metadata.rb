@@ -1,0 +1,7 @@
+name              'centrifuge'
+maintainer        'FlagshipPromotions'
+maintainer_email  'maintainer@flagshoppromotions.com'
+license           'Unknown'
+description       'Deploys apps'
+version           '0.1.0'
+recipe            'deploy', 'Deploys apps'

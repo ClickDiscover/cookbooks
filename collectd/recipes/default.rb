@@ -6,6 +6,10 @@ yum_package 'collectd-curl' do
   action :install
 end
 
+yum_package 'collectd-curl_xml' do
+  action :install
+end
+
 yum_package 'collectd-nginx' do
   action :install
 end

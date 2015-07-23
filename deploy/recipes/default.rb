@@ -36,11 +36,9 @@ end
 
 # install dependencies via composer
 execute 'composer-deps' do
-  ignore_failure true
+  cwd "#{centrifuge}"
   user 'ec2-user'
   group 'ec2-user'
 
-  command <<-EOH
-    /usr/local/bin/composer install -d #{centrifuge}/current
-  EOH
+  command '/usr/local/bin/composer install'
 end

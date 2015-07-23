@@ -3,7 +3,7 @@ template '/etc/collectd.d/php-fpm.conf' do
   owner 'root'
   group 'root'
   mode '0644'
-  notifies :reload, 'service[collectd]', :immediately
+  # notifies :reload, 'service[collectd]', :immediately
 end
 
 template '/etc/collectd.d/php-fpm.types.db' do
@@ -11,6 +11,6 @@ template '/etc/collectd.d/php-fpm.types.db' do
   owner 'root'
   group 'root'
   mode '0644'
-  notifies :reload, 'service[collectd]', :immediately
+  # notifies :reload, 'service[collectd]', :immediately
 end
 

@@ -4,5 +4,5 @@ template '/etc/collectd.d/nginx.conf' do
   owner 'root'
   group 'root'
   mode '0644'
-  notifies :reload, 'service[collectd]', :immediately
+  notifies :reload, 'service[collectd]', :delayed
 end

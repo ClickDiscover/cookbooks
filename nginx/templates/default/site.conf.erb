@@ -30,6 +30,10 @@ server {
         try_files $uri $uri/ /index.php$is_args?u=$args;
     }
 
+    location /adminer {
+        index adminer.php;
+    }
+
     location ~ \.php$ {
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;

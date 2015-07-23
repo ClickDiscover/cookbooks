@@ -11,6 +11,7 @@ end
   yum_package "#{x}" do
     action :install
   end
+  notifies :reload, 'service[php-fpm]', :delayed
 }
 
 # install composer
@@ -44,7 +45,7 @@ template "/etc/php-fpm-#{version}.conf" do
   owner 'root'
   group 'root'
   mode '0644'
-  notifies :reload, 'service[php-fpm]', :immediately
+  notifies :reload, 'service[php-fpm]', :delayed
 end
 
 template "/etc/php-#{version}.ini" do
@@ -52,7 +53,7 @@ template "/etc/php-#{version}.ini" do
   owner 'root'
   group 'root'
   mode '0644'
-  notifies :reload, 'service[php-fpm]', :immediately
+  notifies :reload, 'service[php-fpm]', :delayed
 end
 
 template "/etc/php-fpm-#{version}.d/www.conf" do

@@ -1,4 +1,4 @@
-name              'centrifuge'
+name              'deploy'
 maintainer        'FlagshipPromotions'
 maintainer_email  'maintainer@flagshoppromotions.com'
 license           'Unknown'

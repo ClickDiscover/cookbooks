@@ -29,3 +29,13 @@ link '/srv/www/centrifuge/current/static' do
   owner node[:opsworks][:deploy_user][:user]
   group node[:opsworks][:deploy_user][:group]
 end
+
+# install dependencies via composer
+execute 'composer-deps' do
+  ignore_failure true
+  cwd '/srv/www/centrifuge/current'
+  user 'ec2-user'
+  group 'ec2-user'
+
+  command '/usr/local/bin/composer'
+end

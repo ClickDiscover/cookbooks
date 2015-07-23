@@ -16,7 +16,8 @@ end
 # install composer
 execute 'install-composer' do
   user 'root'
-  group 'rootr'
+  group 'root'
+  creates '/usr/local/bin/composer'
 
   command <<-EOH
     /usr/bin/curl -sS https://getcomposer.org/installer | /usr/bin/php -- --install-dir=/usr/local/bin --filename=composer

@@ -37,5 +37,5 @@ execute 'composer-deps' do
   user 'ec2-user'
   group 'ec2-user'
 
-  command '/usr/local/bin/composer'
+  command '/usr/local/bin/composer install'
 end

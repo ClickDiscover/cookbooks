@@ -1,5 +1,6 @@
 include_recipe 'deploy'
 
+# deploy applications
 node[:deploy].each do |application, deploy|
   opsworks_deploy_dir do
     user deploy[:user]
@@ -19,4 +20,12 @@ template '/srv/www/centrifuge/current/Centrifuge/config.php' do
   owner node[:opsworks][:deploy_user][:user]
   group node[:opsworks][:deploy_user][:group]
   mode '0640'
+end
+
+# symlink static files
+link '/srv/www/centrifuge/current/Centrifuge-Landers/static' do
+  to '/srv/www/centrifuge/current/Centrifuge/static'
+  ignore_failure true
+  owner node[:opsworks][:deploy_user][:user]
+  group node[:opsworks][:deploy_user][:group]
 end

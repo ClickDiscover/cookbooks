@@ -1,13 +1,26 @@
 # install PHP-FPM
 version = node['php-fpm']['version']
-package_version = version.sub('.', '')
+# php version
+pv = version.sub('.', '')
 
 if not ['5.4', '5.5', '5.6'].include?(version)
   Chef::Application.fatal!("Unsupported PHP-FPM version #{version}", 1)
 end
 
-yum_package "php#{package_version}-fpm" do
-  action :install
+["php#{pv}-mbstring", "php#{pv}-pdo", "php#{pv}-pgsql", "php#{pv}-fpm"].each {|x|
+  yum_package "#{x}" do
+    action :install
+  end
+}
+
+# install composer
+execute 'install-composer' do
+  user 'root'
+  group 'rootr'
+
+  command <<-EOH
+    /usr/bin/curl -sS https://getcomposer.org/installer | /usr/bin/php -- --install-dir=/usr/local/bin --filename=composer
+  EOH
 end
 
 # define PHP-FPM system service

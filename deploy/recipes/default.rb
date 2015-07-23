@@ -23,7 +23,7 @@ template '/srv/www/centrifuge/current/config.php' do
 end
 
 # symlink static files
-link '/srv/www/centrifuge-landers/current/static' do
+link '/srv/www/centrifuge_landers/current/static' do
   to '/srv/www/centrifuge/current/static'
   ignore_failure true
   owner node[:opsworks][:deploy_user][:user]

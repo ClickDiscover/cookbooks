@@ -26,6 +26,10 @@ server {
 
     root <%= node['nginx']['root_dir'] %>;
 
+    location / {
+        try_files $uri $uri/ /index.php$is_args?u=$args;
+    }
+
     location ~ \.php$ {
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;

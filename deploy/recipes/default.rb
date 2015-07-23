@@ -1,5 +1,9 @@
 include_recipe 'deploy'
 
+www_dir = "/srv/www"
+centrifuge = "#{www_dir}/centrifuge"
+centrifuge_landers = "#{www_dir}/centrifuge_landers"
+
 # deploy applications
 node[:deploy].each do |application, deploy|
   opsworks_deploy_dir do
@@ -15,7 +19,7 @@ node[:deploy].each do |application, deploy|
 end
 
 # configure Centrifuge
-template '/srv/www/centrifuge/current/config.php' do
+template "#{centrifuge}/current/config.php" do
   source 'centrifuge.config.php.erb'
   owner node[:opsworks][:deploy_user][:user]
   group node[:opsworks][:deploy_user][:group]
@@ -23,8 +27,8 @@ template '/srv/www/centrifuge/current/config.php' do
 end
 
 # symlink static files
-link '/srv/www/centrifuge/current/static' do
-  to '/srv/www/centrifuge_landers/current/static'
+link "#{centrifuge}/current/static" do
+  to "#{centrifuge_landers}/current/static"
   ignore_failure true
   owner node[:opsworks][:deploy_user][:user]
   group node[:opsworks][:deploy_user][:group]
@@ -33,9 +37,10 @@ end
 # install dependencies via composer
 execute 'composer-deps' do
   ignore_failure true
-  cwd '/srv/www/centrifuge/current'
   user 'ec2-user'
   group 'ec2-user'
 
-  command '/usr/local/bin/composer install'
+  command <<-EOH
+    /usr/local/bin/composer install -d #{centrifuge}/current
+  EOH
 end

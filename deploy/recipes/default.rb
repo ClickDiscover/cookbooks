@@ -36,7 +36,7 @@ end
 
 # install dependencies via composer
 execute 'composer-deps' do
-  cwd "#{centrifuge}"
+  cwd "#{centrifuge}/current"
   user 'ec2-user'
   group 'ec2-user'
 

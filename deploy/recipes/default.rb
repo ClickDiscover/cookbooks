@@ -22,16 +22,10 @@ template '/srv/www/centrifuge/current/config.php' do
   mode '0640'
 end
 
-begin
-  # symlink static files
-  link '/srv/www/centrifuge-landers/current/static' do
-    to '/srv/www/centrifuge/current/static'
-    owner node[:opsworks][:deploy_user][:user]
-    group node[:opsworks][:deploy_user][:group]
-  end
-rescue Errno::ENOENT
-  log 'message' do
-    message "******Skipping /srv/www/centrifuge/current/static -> /srv/www/centrifuge-landers/current/static symlink creation******"
-    level :warn
-  end
+# symlink static files
+link '/srv/www/centrifuge-landers/current/static' do
+  to '/srv/www/centrifuge/current/static'
+  ignore_failure true
+  owner node[:opsworks][:deploy_user][:user]
+  group node[:opsworks][:deploy_user][:group]
 end

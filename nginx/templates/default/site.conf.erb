@@ -24,7 +24,7 @@ server {
 
     server_name <%= @domain %> www.<%= @domain %>;
 
-    root /home/ec2-user/www;
+    root <%= node['nginx']['root_dir'] %>;
 
     location ~ \.php$ {
         fastcgi_pass   127.0.0.1:9000;

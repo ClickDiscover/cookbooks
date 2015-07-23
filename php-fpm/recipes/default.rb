@@ -10,8 +10,8 @@ end
 ["php#{pv}-mbstring", "php#{pv}-pdo", "php#{pv}-pgsql", "php#{pv}-fpm"].each {|x|
   yum_package "#{x}" do
     action :install
+    notifies :reload, 'service[php-fpm]', :delayed
   end
-  notifies :reload, 'service[php-fpm]', :delayed
 }
 
 # install composer

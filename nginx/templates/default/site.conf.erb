@@ -34,6 +34,13 @@ server {
         index adminer.php;
     }
 
+    # caching of static files
+    location ~* \.(js|css|png|jpg|jpeg|gif|swf|xml|txt|ico|pdf|flv)$ {
+        access_log off;
+        log_not_found off;
+        expires max;
+    }
+
     location ~ \.php$ {
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;

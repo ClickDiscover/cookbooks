@@ -1,9 +1,7 @@
 #
 require 'aws-sdk'
 
-# gather EC2 metadata
-ec2md = '/opt/aws/bin/ec2-metadata'
-public_ipv4 = `#{ec2md} -v`.split(' ')[1]
+public_ipv4 = node[:opsworks][:instance][:ip]
 
 # replace hostname's last dash with dot;
 # reverse server's hostname, then replace first dash, then reverse result again

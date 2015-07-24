@@ -34,6 +34,13 @@ link "#{centrifuge}/current/www/static" do
   group node[:opsworks][:deploy_user][:group]
 end
 
+link "#{centrifuge}/current/www/landers" do
+  to "#{centrifuge_landers}/current/landers"
+  ignore_failure true
+  owner node[:opsworks][:deploy_user][:user]
+  group node[:opsworks][:deploy_user][:group]
+end
+
 # install dependencies via composer
 execute 'composer-deps' do
   cwd "#{centrifuge}/current"

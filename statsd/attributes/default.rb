@@ -9,11 +9,13 @@ default['statsd']['graphite_enabled'] = false
 #
 # Add any additional backend configuration here.
 #
+
+
 default['statsd']['extra_config'] = {
   'librato' => {
     'email' => node['librato']['email'],
     'token' => node['librato']['api_key'],
-    'source' => node['hostname'],
+    'source' => 'centrifuge_' + node['hostname'],
     'includeMetrics' => ['/centrifuge/']
   }
 }

@@ -5,3 +5,5 @@ default[:centrifuge][:log_level] = 'Monolog\Logger::INFO'
 default[:centrifuge][:fallback_lander] = 1
 default[:centrifuge][:click_method] = 'direct'
 default[:centrifuge][:click_url] = '"base2.php"'
+default[:centrifuge][:click_url] = '"base2.php"'
+default[:centrifuge][:enable_lander_tracking] = true

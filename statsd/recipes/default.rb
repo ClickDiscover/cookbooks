@@ -13,6 +13,6 @@ end
 
 template '/etc/init.d/statsd' do
   source 'initd.conf.erb'
-  mode 0644
+  mode 0755
   notifies :restart, 'service[statsd]', :delayed
 end

@@ -27,19 +27,14 @@ template "#{centrifuge}/current/config.php" do
 end
 
 # symlink static files
-link "#{centrifuge}/current/www/static" do
-  to "#{centrifuge_landers}/current/static"
-  ignore_failure true
-  owner node[:opsworks][:deploy_user][:user]
-  group node[:opsworks][:deploy_user][:group]
-end
-
-link "#{centrifuge}/current/www/landers" do
-  to "#{centrifuge_landers}/current/landers"
-  ignore_failure true
-  owner node[:opsworks][:deploy_user][:user]
-  group node[:opsworks][:deploy_user][:group]
-end
+['static', 'landers'].each {|x|
+  link "#{centrifuge}/current/www/#{x}" do
+    to "#{centrifuge_landers}/current/#{x}"
+    ignore_failure true
+    owner node[:opsworks][:deploy_user][:user]
+    group node[:opsworks][:deploy_user][:group]
+  end
+}
 
 # install dependencies via composer
 execute 'composer-deps' do

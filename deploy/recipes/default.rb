@@ -42,7 +42,7 @@ end
     to "#{www_dir}/#{x}/current"
     ignore_failure true
     owner node[:opsworks][:deploy_user][:user]
-    group node[:opsworks][:deploy_user][:user]
+    group node[:opsworks][:deploy_user][:group]
   end
 }
 

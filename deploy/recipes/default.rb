@@ -38,12 +38,11 @@ end
 
 # convience symlinks in ~
 ['centrifuge', 'centrifuge_landers'].each {|x|
-  user = node[:opsworks][:deploy_user][:user]
   link "#{www_dir}/#{x}/current" do
-    to "/home/#{user}/#{x}"
+    to "/home/#{node[:opsworks][:deploy_user][:user]}/#{x}"
     ignore_failure true
-    owner user
-    group user
+    owner node[:opsworks][:deploy_user][:user]
+    group node[:opsworks][:deploy_user][:user]
   end
 }
 

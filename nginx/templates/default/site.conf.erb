@@ -27,8 +27,10 @@ server {
     root <%= node['nginx']['root_dir'] %>;
 
     location / {
-        try_files $uri $uri/ /index.php$is_args?u=$args;
-        error_page 403 /index.php$is_args?u=$args;
+        if (-f $request_filename/index.php) {
+            break;
+        }
+        try_files $uri $uri/index.html /index.php$is_args?u=$args;
     }
 
     # caching of static files

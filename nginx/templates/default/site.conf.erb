@@ -30,10 +30,6 @@ server {
         try_files $uri $uri/ /index.php$is_args?u=$args;
     }
 
-    location /adminer {
-        index adminer.php;
-    }
-
     # caching of static files
     location ~* \.(js|css|png|jpg|jpeg|gif|swf|xml|txt|ico|pdf|flv)$ {
         access_log off;

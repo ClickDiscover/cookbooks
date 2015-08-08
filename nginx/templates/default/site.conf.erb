@@ -27,11 +27,8 @@ server {
     root <%= node['nginx']['root_dir'] %>;
 
     location / {
-        try_files $uri $uri/ /index.php$is_args?u=$args @fallback;
-    }
-
-    location @fallback {
-        rewrite .* /index.php$is_args?u=$args;
+        try_files $uri $uri/ /index.php$is_args?u=$args;
+        error_page 403 /index.php$is_args?u=$args;
     }
 
     # caching of static files

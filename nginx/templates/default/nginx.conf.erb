@@ -51,10 +51,10 @@ http {
     output_buffers              4 32k;
     postpone_output             1460;
     request_pool_size           32k;
-    client_body_timeout         10s;
+    client_body_timeout         30s;
     connection_pool_size        256;
     client_max_body_size        200M;
-    client_header_timeout       10s;
+    client_header_timeout       30s;
     ignore_invalid_headers      on;
     client_body_buffer_size     128k;
     client_body_in_file_only    off;

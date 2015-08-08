@@ -36,6 +36,18 @@ end
   end
 }
 
+# convience symlinks in ~
+['centrifuge', 'centrifuge_landers'].each {|x|
+  link "#{www_dir}/#{x}/current" do
+    to "/home/#{node[:opsworks][:deploy_user][:user]}/#{x}"
+    ignore_failure true
+    owner node[:opsworks][:deploy_user][:user]
+    group node[:opsworks][:deploy_user][:user]
+  end
+}
+
+
+
 # install dependencies via composer
 execute 'composer-deps' do
   cwd "#{centrifuge}/current"

@@ -11,12 +11,17 @@ service 'collectd' do
   supports :restart => true, :status => true, :reload => true
   action [:enable, :start]
 end
-
 # configure collectd
+source = [node[:librato][:application], node[:librato][:environment], node[:hostname]].compact.join('.')
+
 template '/etc/collectd.conf' do
   source 'collectd.conf.erb'
   owner 'root'
   group 'root'
   mode '0644'
+
+  variables({
+    :source => source
+  })
   notifies :reload, 'service[collectd]', :immediately
 end

@@ -2,7 +2,7 @@
 default['statsd']['backends'] = { 'statsd-librato-backend' => nil }
 
 # Do we automatically delete idle stats?
-default['statsd']['delete_idle_stats'] = false
+default['statsd']['delete_idle_stats'] = true
 
 # Is the graphite backend enabled?
 default['statsd']['graphite_enabled'] = false
@@ -11,11 +11,12 @@ default['statsd']['graphite_enabled'] = false
 #
 
 
+source = [node['librato']['environment'], node['hostname']].compact.join('.')
 default['statsd']['extra_config'] = {
   'librato' => {
     'email' => node['librato']['email'],
     'token' => node['librato']['api_key'],
-    'source' => 'centrifuge_' + node['hostname'],
+    'source' => source,
     'includeMetrics' => ['/centrifuge/']
   }
 }

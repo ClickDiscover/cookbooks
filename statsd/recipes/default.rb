@@ -11,8 +11,11 @@ service 'statsd' do
   action [:enable, :start]
 end
 
+source = [node[:librato][:application], node[:librato][:environment], node[:hostname]].compact.join('.')
+
 template '/etc/init.d/statsd' do
   source 'initd.conf.erb'
   mode 0755
+
   notifies :restart, 'service[statsd]', :delayed
 end

@@ -1,4 +1,5 @@
 default[:centrifuge][:ttl] = 3600
+default[:centrifuge][:ae_ttl] = 300
 default[:centrifuge][:env] = 'production'
 default[:centrifuge][:pdo_url] = 'pgsql:host=localhost;dbname=rotator;port=5432;user=rotator'
 default[:centrifuge][:log_level] = 'Monolog\Logger::INFO'

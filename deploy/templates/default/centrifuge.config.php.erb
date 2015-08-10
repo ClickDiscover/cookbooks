@@ -13,6 +13,7 @@ define('CENTRIFUGE_CACHE_ROOT', '/tmp/centrifuge/');
 
 require_once CENTRIFUGE_ROOT . '/vendor/autoload.php';
 
+define('AE_TTL', <%= node[:centrifuge][:ae_ttl] %>);
 define('OBJ_TTL', <%= node[:centrifuge][:ttl] %>);
 define('PDO_URL', '<%= node[:centrifuge][:pdo_url] %>');
 define('CENTRIFUGE_LOG_LEVEL', <%= node[:centrifuge][:log_level] %>);

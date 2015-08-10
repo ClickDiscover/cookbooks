@@ -7,3 +7,4 @@ default[:centrifuge][:fallback_lander] = 1
 default[:centrifuge][:click_method] = 'redirect'
 default[:centrifuge][:click_url] = '"http://cpv.flagshippromotions.com/base2.php"'
 default[:centrifuge][:enable_lander_tracking] = true
+default[:centrifuge][:redis_url] = true

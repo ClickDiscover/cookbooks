@@ -9,8 +9,8 @@ if not node['cloaker']['name']
 end
 
 # set up cloaker script
-user='ec2-user'
-group='ec2-group'
+user = 'ec2-user'
+group = 'ec2-user'
 template "/home/#{user}/www/index.php" do
   source 'index.php.erb'
   owner user

@@ -1,11 +1,11 @@
 # don't proceed if id or name aren't set
 if not node['cloaker']['id']
-  raise Error, "Unable to set up cloaker: id isn't set"
+  raise "Unable to set up cloaker: id isn't set"
 end
 
 # don't proceed if id or name aren't set
 if not node['cloaker']['name']
-  raise Error, "Unable to set up cloaker: name isn't set"
+  raise "Unable to set up cloaker: name isn't set"
 end
 
 # set up cloaker script

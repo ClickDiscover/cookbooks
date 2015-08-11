@@ -11,13 +11,13 @@ default['statsd']['graphite_enabled'] = false
 #
 
 
-source = [node['librato']['environment'], node['hostname']].compact.join('.')
+# source = [node['librato']['environment'], node['hostname']].compact.join('.')
 default['statsd']['extra_config'] = {
   'librato' => {
     'email' => node['librato']['email'],
     'token' => node['librato']['api_key'],
-    'source' => source,
-    'includeMetrics' => ['/centrifuge/']
+    'includeMetrics' => ['/centrifuge/'],
+    'sourceRegex' => '/^([^\-]+)\-/'
   }
 }
 

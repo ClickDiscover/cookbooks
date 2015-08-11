@@ -23,3 +23,7 @@ define('CLICK_METHOD', '<%= node[:centrifuge][:click_method] %>');
 define('CLICK_URL', <%= node[:centrifuge][:click_url] %>);
 define('ENABLE_LANDER_TRACKING', <%= node[:centrifuge][:enable_lander_tracking] %>);
 define('REDIS_URL', '<%= node[:centrifuge][:redis_url] %>');
+
+// Statsd
+define('LIBRATO_ENV', '<%= node[:librato][:environment] %>');
+define('HOSTNAME', '<%= node[:hostname] %>');

@@ -16,7 +16,7 @@ default['statsd']['extra_config'] = {
   'librato' => {
     'email' => node['librato']['email'],
     'token' => node['librato']['api_key'],
-    'includeMetrics' => ['/centrifuge/'],
+    'includeMetrics' => ['/centrifuge/', '/keyword/', '/lander/'],
     'sourceRegex' => '/^([^\-]+)\-/'
   }
 }

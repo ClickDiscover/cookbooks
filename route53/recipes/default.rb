@@ -26,12 +26,25 @@ route53 = AWS::Route53::Client.new(
 #
 zone = nil
 # get list of hosted zones
-route53.list_hosted_zones.hosted_zones.each{ |hz|
-  # ignore trailing dot
-  if hz.name[0...-1] === domain
-    zone = hz
+marker = nil
+while true
+  # The maximum number of hosted zones returned by R53 API is 100
+  if marker
+    resp = route53.list_hosted_zones({marker: marker})
+  else
+    resp = route53.list_hosted_zones
   end
-}
+
+  resp.hosted_zones.each{ |hz|
+    # ignore trailing dot
+    if hz.name[0...-1] === domain
+      zone = hz
+    end
+  }
+  # stop is there are no more pages
+  break if !resp.is_truncated
+  marker = resp.next_marker
+end
 
 # don't proceed if there's no hosted zone for configured domain
 if not zone then

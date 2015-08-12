@@ -37,8 +37,6 @@ while true
 
   resp.hosted_zones.each{ |hz|
     # ignore trailing dot
-    puts hz.name[0...-1]
-    puts hz.name.class
     if hz.name[0...-1] === domain
       zone = hz
     end

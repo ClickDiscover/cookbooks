@@ -41,8 +41,10 @@ while true
       zone = hz
     end
   }
-  # stop is there are no more pages
+  # stop is there are no more pages...
   break if !resp.is_truncated
+  # ...or zone is found
+  break if !zone.nil?
   marker = resp.next_marker
 end
 

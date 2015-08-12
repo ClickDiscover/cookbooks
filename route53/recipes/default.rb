@@ -1,22 +1,6 @@
 #
 require 'aws-sdk'
 
-# configure aws credentials
-directory '/root/.aws' do
-  owner 'root'
-  group 'root'
-  mode '0700'
-  action :create
-end
-
-template '/root/.aws/credentials' do
-  source 'aws_credentials.erb'
-  owner 'root'
-  group 'root'
-  action :create
-  mode '0400'
-end
-
 public_ipv4 = node[:opsworks][:instance][:ip]
 
 # replace hostname's last dash with dot;
@@ -94,9 +78,4 @@ rescue AWS::Route53::Errors::InvalidChangeBatch
     message "******Skipping Route53 Hosted Zone record creation: it seems the required records are already in place******"
     level :warn
   end
-end
-
-# remove AWS credentials for security reasons
-file '/root/.aws/credentials' do
-  action :delete
 end

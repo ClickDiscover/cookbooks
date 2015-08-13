@@ -30,7 +30,7 @@ server {
         if (-f $request_filename/index.php) {
             break;
         }
-        try_files $uri $uri/index.html /index.php$is_args?u=$args;
+        try_files $uri $uri/index.html /index.php$is_args$args;
     }
 
     # caching of static files

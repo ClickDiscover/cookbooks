@@ -3,11 +3,7 @@ group = 'ec2-user'
 
 # don't proceed if cloaker is already installed and reinstall flag isn't set
 if File.exists?("/home/#{user}/www/index.php") and !node['cloaker']['reinstall']
-  log 'message' do
-    message "******Skipping Cloaker index.php creation as it already exists and the 'reinstall' flag isn't set******"
-    level :info
-  end
-  raise "Unable to set up cloaker: already exists"
+  raise "Unable to set up cloaker: already installed"
 end
 
 # don't proceed if id or name aren't set

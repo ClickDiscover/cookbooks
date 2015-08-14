@@ -7,7 +7,7 @@ if File.exists?("/home/#{user}/www/index.php") and !node['cloaker']['reinstall']
     message "******Skipping Cloaker index.php creation as it already exists and the 'reinstall' flag isn't set******"
     level :info
   end
-  return
+  raise "Unable to set up cloaker: already exists"
 end
 
 # don't proceed if id or name aren't set

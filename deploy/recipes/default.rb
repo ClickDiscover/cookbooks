@@ -20,8 +20,8 @@ end
 
 # Setup logging
 directory"/var/log/centrifuge" do
-  owner node[:opsworks][:deploy_user][:user]
-  group node[:opsworks][:deploy_user][:group]
+  owner 'nginx'
+  group 'nginx'
   mode '0755'
   action :create
 end

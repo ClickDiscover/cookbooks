@@ -1,0 +1,8 @@
+/var/log/nginx/*log {
+    create 0644 ec2-user ec2-user
+    daily
+    rotate 10
+    missingok
+    notifempty
+    compress
+}

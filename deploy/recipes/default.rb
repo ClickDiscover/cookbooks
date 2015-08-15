@@ -18,6 +18,22 @@ node[:deploy].each do |application, deploy|
   end
 end
 
+# Setup logging
+directory"/var/log/centrifuge" do
+  owner node[:opsworks][:deploy_user][:user]
+  group node[:opsworks][:deploy_user][:group]
+  mode '0755'
+  action :create
+end
+
+template "/etc/logrotate.d/centrifuge" do
+  source 'logrotate.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
+
+
 # configure Centrifuge
 template "#{centrifuge}/current/config.php" do
   source 'centrifuge.config.php.erb'

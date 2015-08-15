@@ -1,30 +1,58 @@
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+
+//////////////////////////
+// Application Settings //
+//////////////////////////
+
+define('CLICK_URL',              '<%= node[:centrifuge][:click_url] %>');
+define('CLICK_METHOD',           '<%= node[:centrifuge][:click_method] %>');
+define('CENTRIFUGE_ENV',         '<%= node[:centrifuge][:env] %>');
+define('FALLBACK_LANDER',         <%= node[:centrifuge][:fallback_lander] %>);
+define('ENABLE_LANDER_TRACKING',  <%= node[:centrifuge][:enable_lander_tracking] %>);
+
+
+///////////////
+// Locations //
+///////////////
+
+define('CENTRIFUGE_ROOT',         __DIR__);
+define('CENTRIFUGE_WEB_ROOT',     CENTRIFUGE_ROOT . '/www');
+define('CENTRIFUGE_APP_ROOT',     CENTRIFUGE_ROOT . '/app');
+define('CENTRIFUGE_MODELS_ROOT',  CENTRIFUGE_APP_ROOT . '/models');
+define('CENTRIFUGE_STATIC_ROOT',  '/static');
+define('CENTRIFUGE_PRODUCT_ROOT', '/static/products/');
+define('CENTRIFUGE_LANDER_ROOT',  '/landers/');
+
+
+/////////////
+// Logging //
+/////////////
+
+define('CENTRIFUGE_LOG_ROOT', '<%= node[:centrifuge][:log_path] %>');
+define('CENTRIFUGE_LOG_LEVEL', <%= node[:centrifuge][:log_level] %>);
+
+
+/////////////
+// Caching //
+/////////////
+
+define('AE_TTL',                <%= node[:centrifuge][:ae_ttl] %>);
+define('OBJ_TTL',               <%= node[:centrifuge][:ttl] %>);
+define('CENTRIFUGE_CACHE_ROOT', '/tmp/centrifuge/');
+
+
+//////////////////////
+// Other services.. //
+//////////////////////
+
+define('HOSTNAME',    '<%= node[:hostname] %>');
+define('PDO_URL',     '<%= node[:centrifuge][:pdo_url] %>');
+define('REDIS_URL',   '<%= node[:centrifuge][:redis_url] %>');
+define('LIBRATO_ENV', '<%= node[:librato][:environment] %>');
+define('SEGMENT_KEY', '<%= node[:segment][:write_key] %>');
+
+
 
 date_default_timezone_set('UTC');
-
-define('CENTRIFUGE_ROOT', __DIR__);
-define('CENTRIFUGE_WEB_ROOT', CENTRIFUGE_ROOT . '/www');
-define('CENTRIFUGE_APP_ROOT', CENTRIFUGE_ROOT . '/app');
-define('CENTRIFUGE_MODELS_ROOT', CENTRIFUGE_APP_ROOT . '/models');
-define('CENTRIFUGE_STATIC_ROOT', '/static');
-define('CENTRIFUGE_PRODUCT_ROOT', '/static/products/');
-define('CENTRIFUGE_LOG_ROOT', '/tmp/centrifuge.log');
-define('CENTRIFUGE_CACHE_ROOT', '/tmp/centrifuge/');
-define('CENTRIFUGE_LANDER_ROOT', '/landers/');
-
-require_once CENTRIFUGE_ROOT . '/vendor/autoload.php';
-
-define('AE_TTL', <%= node[:centrifuge][:ae_ttl] %>);
-define('OBJ_TTL', <%= node[:centrifuge][:ttl] %>);
-define('PDO_URL', '<%= node[:centrifuge][:pdo_url] %>');
-define('CENTRIFUGE_LOG_LEVEL', <%= node[:centrifuge][:log_level] %>);
-define('CENTRIFUGE_ENV', '<%= node[:centrifuge][:env] %>');
-define('FALLBACK_LANDER', <%= node[:centrifuge][:fallback_lander] %>);
-define('CLICK_METHOD', '<%= node[:centrifuge][:click_method] %>');
-define('CLICK_URL', <%= node[:centrifuge][:click_url] %>);
-define('ENABLE_LANDER_TRACKING', <%= node[:centrifuge][:enable_lander_tracking] %>);
-define('REDIS_URL', '<%= node[:centrifuge][:redis_url] %>');
-
-// Statsd
-define('LIBRATO_ENV', '<%= node[:librato][:environment] %>');
-define('HOSTNAME', '<%= node[:hostname] %>');

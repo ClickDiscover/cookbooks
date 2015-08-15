@@ -1,22 +1,27 @@
-# don't proceed if id isn't set
-return if not node['cloaker']['id']
+user = 'ec2-user'
+group = 'ec2-user'
 
-# replace hostname's last dash with dot;
-# reverse server's hostname, then replace first dash, then reverse result again
-domain = node[:hostname].reverse.sub('-', '.').reverse
+index_path = "/home/#{user}/www/index.php"
 
-# set required parameters
-id   = node['cloaker']['id']
-host = node['cloaker']['gencloaker_host']
-port = node['cloaker']['gencloaker_port']
-name = if node['cloaker']['name'].present? then node['cloaker']['name'] else domain end
+# don't proceed if cloaker is already installed and reinstall flag isn't set
+if File.exists?(index_path) and !node['cloaker']['reinstall']
+  raise "Unable to set up cloaker: already installed"
+end
 
-# download cloaker script
-execute 'deploy-cloaker' do
-  user 'ec2-user'
-  group 'ec2-user'
+# don't proceed if id or name aren't set
+if not node['cloaker']['id']
+  raise "Unable to set up cloaker: id isn't set"
+end
 
-  command <<-EOH
-    /usr/bin/wget --timeout=10 -t 3 -O/home/ec2-user/www/index.php "http://#{host}:#{port}/cloaker?id=#{id}&name=#{name}"
-  EOH
+# don't proceed if id or name aren't set
+if not node['cloaker']['name']
+  raise "Unable to set up cloaker: name isn't set"
+end
+
+# set up cloaker script
+template index_path do
+  source 'index.php.erb'
+  owner user
+  group group
+  mode '0644'
 end

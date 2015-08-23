@@ -36,7 +36,7 @@ end
 
 # configure Centrifuge
 template "#{centrifuge}/current/config.php" do
-  source 'centrifuge.config.php.erb'
+  source 'version2.config.php.erb'
   owner node[:opsworks][:deploy_user][:user]
   group node[:opsworks][:deploy_user][:group]
   mode '0644'

@@ -10,3 +10,6 @@ default[:centrifuge][:click_url] = 'http://cpv.flagshippromotions.com/base2.php'
 default[:centrifuge][:enable_lander_tracking] = true
 default[:centrifuge][:redis_url] = true
 default[:segment][:write_key] = nil
+
+# Not used yet
+default[:centrifuge][:content_repo] = 'centrifuge_landers'

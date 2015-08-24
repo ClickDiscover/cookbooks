@@ -14,7 +14,7 @@ define('CENTRIFUGE_SRC_ROOT',      CENTRIFUGE_ROOT . '/src/');
 $config = array(
     'name'        => 'centrifuge',
     'hostname'    => '<%= node[:hostname] %>',
-    'environment' => '<%= node[:librato][:environment] %>'
+    'environment' => '<%= node[:librato][:environment] %>',
 
     'application' => array(
         'debug'           => <%= node[:centrifuge][:debug] %>

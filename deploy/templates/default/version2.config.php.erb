@@ -17,24 +17,24 @@ $config = array(
     'environment' => '<%= node[:librato][:environment] %>',
 
     'application' => array(
-        'debug'           => <%= node[:centrifuge][:debug] %>
-        'mode'            => '<%= node[:centrifuge][:mode] %>'
+        'debug'           => <%= node[:centrifuge][:debug] %>,
+        'mode'            => '<%= node[:centrifuge][:mode] %>',
         'templates.path'  => CENTRIFUGE_TEMPLATE_ROOT,
-        'click_url'       => '<%= node[:centrifuge][:click_url] %>'
-        'click_method'    => '<%= node[:centrifuge][:click_method] %>'
-        'fallback_lander' => <%= node[:centrifuge][:fallback_lander] %>
+        'click_url'       => '<%= node[:centrifuge][:click_url] %>',
+        'click_method'    => '<%= node[:centrifuge][:click_method] %>',
+        'fallback_lander' => <%= node[:centrifuge][:fallback_lander] %>,
         'lander_alias'    => 'content',
         'product.path'    => '/static/products/'
     ),
 
     'cache' => array(
-        'expiration'      => <%= node[:centrifuge][:cache][:expiration] %>
-        'adex.expiration' => <%= node[:centrifuge][:cache][:adex_expiration] %>
+        'expiration'      => <%= node[:centrifuge][:cache][:expiration] %>,
+        'adex.expiration' => <%= node[:centrifuge][:cache][:adex_expiration] %>,
         'root'            => '<%= node[:centrifuge][:cache][:root] %>'
     ),
 
     'database' => array(
-        'pdo'         => '<%= node[:centrifuge][:pdo_url] %>'
+        'pdo'         => '<%= node[:centrifuge][:pdo_url] %>',
         'redis'       => '<%= node[:centrifuge][:redis_url] %>',
         'librato_env' => '<%= node[:librato][:environment] %>',
         'segment_key' => '<%= node[:segment][:write_key] %>'
@@ -42,7 +42,7 @@ $config = array(
 
 
     'logging' => array(
-        'root'  => '<%= node[:centrifuge][:log_path] %>'
+        'root'  => '<%= node[:centrifuge][:log_path] %>',
         'level' => '<%= node[:centrifuge][:log_level] %>'
     ),
 

@@ -24,13 +24,28 @@ $config = array(
         'click_method'    => '<%= node[:centrifuge][:click_method] %>',
         'fallback_lander' => <%= node[:centrifuge][:fallback_lander] %>,
         'lander_alias'    => 'content',
-        'product.path'    => '/static/products/'
+        'product.path'    => '/static/products/',
+        'tracking'         => array(
+            'campaign.key' => 'keyword',
+            'ad.key'       => 'ad'
+        )
+    ),
+
+    'cookie' => array(
+        'session.lifetime' => 1800,     // 30 Minutes
+        'visitor.lifetime' => 33955200, // 13 Months
+        'root.domain'      => '<%= node[:centrifuge][:cookie_domain] %>'
     ),
 
     'cache' => array(
         'expiration'      => <%= node[:centrifuge][:cache][:expiration] %>,
         'adex.expiration' => <%= node[:centrifuge][:cache][:adex_expiration] %>,
         'root'            => '<%= node[:centrifuge][:cache][:root] %>'
+    ),
+
+    'hashids' => array(
+        'salt'      => '<%= node[:centrifuge][:hashids][:salt] %>',
+        'length' => 16
     ),
 
     'database' => array(

@@ -19,3 +19,5 @@ default[:centrifuge][:cache] = {
   'root' => '/tmp/centrifuge/'
 }
 
+default[:centrifuge][:cookie_domain] = '.flagshippromotions.com'
+default[:centrifuge][:hashids][:salt] = 'Quickpop sop. Flagship Salt.'

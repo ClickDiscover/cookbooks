@@ -1,3 +1,4 @@
+
 default[:centrifuge][:pdo_url] = 'pgsql:host=localhost;dbname=rotator;port=5432;user=rotator'
 default[:centrifuge][:log_path] = '/var/log/centrifuge/'
 default[:centrifuge][:log_level] = 'INFO'
@@ -19,5 +20,5 @@ default[:centrifuge][:cache] = {
   'root' => '/tmp/centrifuge/'
 }
 
-default[:centrifuge][:cookie_domain] = '.flagshippromotions.com'
+default[:centrifuge][:cookie_domain] = ''
 default[:centrifuge][:hashids][:salt] = 'Quickpop sop. Flagship Salt.'

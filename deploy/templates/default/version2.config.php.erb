@@ -55,6 +55,9 @@ $config = array(
         'segment_key' => '<%= node[:segment][:write_key] %>'
     ),
 
+    'segment' => array(
+        'write.key' => '<%= node[:segment][:write_key] %>'
+    ),
 
     'logging' => array(
         'root'  => '<%= node[:centrifuge][:log_path] %>',

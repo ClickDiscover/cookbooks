@@ -8,8 +8,8 @@ default[:centrifuge][:click_url] = 'http://cpv.flagshippromotions.com/base2.php'
 default[:centrifuge][:redis_url] = true
 default[:segment][:write_key] = nil
 
-default[:centrifuge][:mode] = 'development'
-default[:centrifuge][:debug] = true
+default[:centrifuge][:mode] = 'production'
+default[:centrifuge][:debug] = false
 
 # Not used yet
 default[:centrifuge][:content_repo] = 'centrifuge_landers'

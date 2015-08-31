@@ -36,21 +36,28 @@ end
 
 # configure Centrifuge
 template "#{centrifuge}/current/config.php" do
-  source 'centrifuge.config.php.erb'
+  source 'version2.config.php.erb'
   owner node[:opsworks][:deploy_user][:user]
   group node[:opsworks][:deploy_user][:group]
   mode '0644'
 end
 
 # symlink static files
-['static', 'landers'].each {|x|
-  link "#{centrifuge}/current/www/#{x}" do
-    to "#{centrifuge_landers}/current/#{x}"
-    ignore_failure true
-    owner node[:opsworks][:deploy_user][:user]
-    group node[:opsworks][:deploy_user][:group]
-  end
-}
+# ['static', 'landers'].each {|x|
+# }
+link "#{centrifuge}/current/www/static" do
+  to "#{centrifuge_landers}/current/static"
+  ignore_failure true
+  owner node[:opsworks][:deploy_user][:user]
+  group node[:opsworks][:deploy_user][:group]
+end
+
+link "#{centrifuge}/current/templates/landers" do
+  to "#{centrifuge_landers}/current/landers"
+  ignore_failure true
+  owner node[:opsworks][:deploy_user][:user]
+  group node[:opsworks][:deploy_user][:group]
+end
 
 # convience symlinks in ~
 ['centrifuge', 'centrifuge_landers'].each {|x|

@@ -1,0 +1,83 @@
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+
+// Locations
+define('CENTRIFUGE_ROOT',          __DIR__);
+define('CENTRIFUGE_WEB_ROOT',      CENTRIFUGE_ROOT . '/www');
+define('CENTRIFUGE_TEMPLATE_ROOT', CENTRIFUGE_ROOT . '/templates/');
+define('CENTRIFUGE_SRC_ROOT',      CENTRIFUGE_ROOT . '/src/');
+
+
+
+// Application config
+$config = array(
+    'name'        => 'centrifuge',
+    'hostname'    => '<%= node[:hostname] %>',
+    'environment' => '<%= node[:librato][:environment] %>',
+
+    'application' => array(
+        'debug'           => <%= node[:centrifuge][:debug] %>,
+        'mode'            => '<%= node[:centrifuge][:mode] %>',
+        'templates.path'  => CENTRIFUGE_TEMPLATE_ROOT,
+        'click_url'       => '<%= node[:centrifuge][:click_url] %>',
+        'click_method'    => '<%= node[:centrifuge][:click_method] %>',
+        'fallback_lander' => <%= node[:centrifuge][:fallback_lander] %>,
+        'lander_alias'    => 'content',
+        'product.path'    => '/static/products/',
+        'tracking'         => array(
+            'campaign.key' => 'keyword',
+            'ad.key'       => 'ad'
+        )
+    ),
+
+    'cookie' => array(
+        'session.lifetime' => 1800,     // 30 Minutes
+        'visitor.lifetime' => 33955200, // 13 Months
+        'root.domain'      => '<%= node[:centrifuge][:cookie_domain] %>'
+    ),
+
+    'cache' => array(
+        'expiration'      => <%= node[:centrifuge][:cache][:expiration] %>,
+        'adex.expiration' => <%= node[:centrifuge][:cache][:adex_expiration] %>,
+        'root'            => '<%= node[:centrifuge][:cache][:root] %>'
+    ),
+
+    'hashids' => array(
+        'salt'      => '<%= node[:centrifuge][:hashids][:salt] %>',
+        'length' => 16
+    ),
+
+    'database' => array(
+        'pdo'         => '<%= node[:centrifuge][:pdo_url] %>',
+        'redis'       => '<%= node[:centrifuge][:redis_url] %>',
+        'librato_env' => '<%= node[:librato][:environment] %>',
+        'segment_key' => '<%= node[:segment][:write_key] %>'
+    ),
+
+    'segment' => array(
+        'write.key' => '<%= node[:segment][:write_key] %>'
+    ),
+
+    'logging' => array(
+        'root'  => '<%= node[:centrifuge][:log_path] %>',
+        'level' => '<%= node[:centrifuge][:log_level] %>'
+    ),
+
+    'flags' => array(
+        'lander_tracking' => true
+    ),
+
+    'paths' => array(
+        'root'             => CENTRIFUGE_ROOT,
+        'web'              => CENTRIFUGE_WEB_ROOT,
+        'app'              => CENTRIFUGE_SRC_ROOT,
+        'routes'           => CENTRIFUGE_ROOT . '/routes/',
+        'relative_static'  => '/static/',
+        'relative_product' => '/static/products/',
+        'relative_landers' => '/landers/'
+    )
+);
+
+// Datetime settings
+date_default_timezone_set('UTC');

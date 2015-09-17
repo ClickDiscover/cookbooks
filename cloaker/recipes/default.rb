@@ -1,7 +1,8 @@
 user = 'ec2-user'
 group = 'ec2-user'
 
-index_path = "/home/#{user}/www/index.php"
+uri = node['cloaker']['url']
+index_path = "/home/#{user}/www/#{uri}"
 
 # don't proceed if cloaker is already installed and reinstall flag isn't set
 if File.exists?(index_path) and !node['cloaker']['reinstall']

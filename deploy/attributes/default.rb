@@ -23,3 +23,7 @@ default[:centrifuge][:cache] = {
 
 default[:centrifuge][:cookie_domain] = ''
 default[:centrifuge][:hashids][:salt] = 'Quickpop sop. Flagship Salt.'
+
+default[:aerospike][:host] = nil
+default[:aerospike][:port] = nil
+default[:aerospike][:namespace] = nil

@@ -52,7 +52,16 @@ $config = array(
     'database' => array(
         'pdo'         => '<%= node[:centrifuge][:pdo_url] %>',
         'redis'       => '<%= node[:centrifuge][:redis_url] %>',
-        'librato_env' => '<%= node[:librato][:environment] %>'
+        'librato_env' => '<%= node[:librato][:environment] %>',
+        'aerospike'   => [
+          'client' => [
+            "hosts" => [
+              ["addr" => '<%= node[:aerospike][:host] %>', "port" => <%= node[:aerospike][:port] %>]
+            ]
+          ],
+          'namespace' => '<%= node[:aerospike][:namespace] %>'
+        ]
+
     ),
 
     'segment' => array(

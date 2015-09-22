@@ -33,6 +33,8 @@ execute "cp #{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-ph
   cwd node['php-fpm']['build_dir']
 end
 
+execute "strip -s /usr/lib64/php/#{version}/modules/aerospike.so"
+
 template "/etc/php-#{version}.d/aerospike.ini" do
   source 'aerospike.ini.erb'
   owner 'root'

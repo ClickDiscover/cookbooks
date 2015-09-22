@@ -29,10 +29,7 @@ execute 'composer run-script post-install-cmd' do
   cwd "#{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php"
 end
 
-execute "cp #{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php/src/aerospike/modules/aerospike.so /usr/lib64/php/#{version}/modules/aerospike.so" do
-  cwd node['php-fpm']['build_dir']
-end
-
+execute "cp #{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php/src/aerospike/modules/aerospike.so /usr/lib64/php/#{version}/modules/aerospike.so"
 execute "strip -s /usr/lib64/php/#{version}/modules/aerospike.so"
 
 template "/etc/php-#{version}.d/aerospike.ini" do

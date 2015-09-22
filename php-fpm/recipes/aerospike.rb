@@ -11,21 +11,21 @@ end
 
 execute 'composer require' do
   command 'composer require aerospike/aerospike-client-php "*"'
-  cwd "#{build_dir}"
+  cwd node['php-fpm']['build_dir']
 end
 
 execute 'make *.sh files executable' do
   command 'find vendor/aerospike/aerospike-client-php/ -name "*.sh" -exec chmod +x {} \;'
-  cwd "#{build_dir}"
+  cwd node['php-fpm']['build_dir']
 end
 
 execute 'composer run-script post-install-cmd' do
   command 'composer run-script post-install-cmd'
-  cwd "#{build_dir}/vendor/aerospike/aerospike-client-php"
+  cwd "#{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php"
 end
 
 file "/usr/lib64/php/#{version}/modules/aerospike.so" do
-  content IO.read("#{build_dir}/vendor/aerospike/aerospike-client-php/src/aerospike/modules/aerospike.so")
+  content IO.read("#{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php/src/aerospike/modules/aerospike.so")
   action :create
   owner 'root'
   group 'root'
@@ -41,7 +41,7 @@ template "/etc/php-#{version}.d/aerospike.ini" do
   notifies :reload, 'service[php-fpm]', :delayed
 end
 
-directory "#{build_dir}/vendor" do
+directory "#{node['php-fpm']['build_dir']}/vendor" do
   action :delete
   recursive true
 end

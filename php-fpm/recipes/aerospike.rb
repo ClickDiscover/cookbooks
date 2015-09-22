@@ -9,18 +9,23 @@ yum_package "php#{pv}-devel" do
   action :install
 end
 
-execute 'composer require' do
-  command 'composer require aerospike/aerospike-client-php "*"'
+directory "#{node['php-fpm']['build_dir']}" do
+  action :create
+  owner 'root'
+  group 'root'
+  mode '0755'
+  recursive true
+end
+
+execute 'composer require aerospike/aerospike-client-php "*"' do
   cwd node['php-fpm']['build_dir']
 end
 
-execute 'make *.sh files executable' do
-  command 'find vendor/aerospike/aerospike-client-php/ -name "*.sh" -exec chmod +x {} \;'
+execute 'find vendor/aerospike/aerospike-client-php/ -name "*.sh" -exec chmod +x {} \;' do
   cwd node['php-fpm']['build_dir']
 end
 
 execute 'composer run-script post-install-cmd' do
-  command 'composer run-script post-install-cmd'
   cwd "#{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php"
 end
 

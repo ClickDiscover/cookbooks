@@ -29,13 +29,8 @@ execute 'composer run-script post-install-cmd' do
   cwd "#{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php"
 end
 
-file "/usr/lib64/php/#{version}/modules/aerospike.so" do
-  content IO.read("#{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php/src/aerospike/modules/aerospike.so")
-  action :create
-  owner 'root'
-  group 'root'
-  mode '0644'
-  notifies :reload, 'service[php-fpm]', :delayed
+execute "cp #{node['php-fpm']['build_dir']}/vendor/aerospike/aerospike-client-php/src/aerospike/modules/aerospike.so /usr/lib64/php/#{version}/modules/aerospike.so" do
+  cwd node['php-fpm']['build_dir']
 end
 
 template "/etc/php-#{version}.d/aerospike.ini" do

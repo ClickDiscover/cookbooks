@@ -16,7 +16,7 @@ end
 # set up cloaker script
 template node['cloaker']['index'] do
   source 'index.php.erb'
-  owner user
-  group group
+  owner node['cloaker']['user']
+  group node['cloaker']['group']
   mode '0644'
 end

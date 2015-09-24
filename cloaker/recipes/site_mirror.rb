@@ -10,7 +10,7 @@ if node['cloaker']['url']
   end
 
   # copy contents of the tmp directory to web server root
-  execute "/usr/bin/rsync #{node['cloaker']['wgetdir']}}/ #{node['cloaker']['dir']}/"
+  execute "/usr/bin/rsync #{node['cloaker']['wgetdir']}/ #{node['cloaker']['dir']}/"
 
   # remove the tmp directory
   directory "#{node['cloaker']['wgetdir']}}" do

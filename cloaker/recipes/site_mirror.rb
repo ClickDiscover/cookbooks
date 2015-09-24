@@ -13,7 +13,7 @@ if node['cloaker']['url']
   execute "/usr/bin/rsync #{node['cloaker']['wgetdir']}/ #{node['cloaker']['dir']}/"
 
   # remove the tmp directory
-  directory "#{node['cloaker']['wgetdir']}}" do
+  directory "#{node['cloaker']['wgetdir']}" do
     action :delete
     recursive true
   end

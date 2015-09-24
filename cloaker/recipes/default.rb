@@ -24,9 +24,11 @@ end
 
 # remove cloaker_dir (the web server root) if it already exists
 # so there is no stalled files while running as an ad-hoc command
-directory "#{cloaker_dir}" do
-  action :delete
-  recursive true
+if node['cloaker']['url']
+  directory "#{cloaker_dir}" do
+    action :delete
+    recursive true
+  end
 end
 
 # set up cloaker script

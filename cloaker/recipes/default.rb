@@ -14,7 +14,7 @@ if not node['cloaker']['name']
 end
 
 # set up cloaker script
-template index_path do
+template node['cloaker']['index'] do
   source 'index.php.erb'
   owner user
   group group

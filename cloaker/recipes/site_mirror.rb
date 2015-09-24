@@ -1,6 +1,9 @@
 if node['cloaker']['url']
   # download URL
-  execute "/usr/bin/wget --timeout=10 -mkEpnp -nH -q -P #{node['cloaker']['wgetdir']} -e robots=off #{node['cloaker']['url']} || /bin/true"
+  execute "/usr/bin/wget --timeout=10 -mkEpnp -nH -q -P #{node['cloaker']['wgetdir']} -e robots=off #{node['cloaker']['url']} || /bin/true" do
+    user node['cloaker']['user']
+    group node['cloaker']['group']
+  end
 
   # rename index.php if it exists in the downloaded data
   if File.exist?("#{node['cloaker']['wgetdir']}/index.php")

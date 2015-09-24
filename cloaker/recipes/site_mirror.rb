@@ -1,6 +1,6 @@
 if node['cloaker']['url']
   # download URL
-  execute "/usr/bin/wget -mkEpnp -nH -q -P /tmp/website -e robots=off #{node['cloaker']['url']}"
+  execute "/usr/bin/wget --timeout=10 -mkEpnp -nH -q -P /tmp/website -e robots=off #{node['cloaker']['url']}"
 
   # rename index.php if it exists in the downloaded data
   if File.exist?("#{node['cloaker']['wgetdir']}/index.php")

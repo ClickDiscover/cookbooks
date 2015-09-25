@@ -1,5 +1,5 @@
-/var/log/centrifuge/*log {
-    create 0644 <%= node[:opsworks][:deploy_user][:user] %> <%= node[:opsworks][:deploy_user][:group] %>
+<%= node[:centrifuge][:log_path] %>/*log {
+    create 0644 <%= node['php-fpm']['user'] %> <%= node['php-fpm']['group'] %>
     daily
     rotate 10
     missingok

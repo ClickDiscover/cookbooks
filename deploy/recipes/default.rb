@@ -19,7 +19,7 @@ node[:deploy].each do |application, deploy|
 end
 
 # Setup logging
-directory"/var/log/centrifuge" do
+directory node[:centrifuge][:log_path] do
   owner 'nginx'
   group 'nginx'
   mode '0755'

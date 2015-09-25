@@ -26,6 +26,12 @@ directory"/var/log/centrifuge" do
   action :create
 end
 
+template "/etc/logrotate.d/centrifuge" do
+  source 'logrotate.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
 
 # configure Centrifuge
 template "#{centrifuge}/current/config.php" do

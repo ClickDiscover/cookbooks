@@ -1,3 +1,11 @@
+# ensure /home/ec2-user directory exists and has correct permissions
+directory '/home/ec2-user' do
+  mode '0711'
+  owner 'ec2-user'
+  group 'ec2-user'
+  action :create
+end
+
 # ensure cloaker directory exists
 directory node['cloaker']['dir'] do
   owner node['cloaker']['user']

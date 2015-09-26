@@ -1,0 +1,8 @@
+<%= node[:centrifuge][:log_path] %>/*log {
+    create 0644 <%= node['php-fpm']['user'] %> <%= node['php-fpm']['group'] %>
+    daily
+    rotate 10
+    missingok
+    notifempty
+    compress
+}

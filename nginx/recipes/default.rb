@@ -19,6 +19,11 @@ template '/etc/nginx/nginx.conf' do
   notifies :reload, 'service[nginx]', :immediately
 end
 
+htpasswd node['nginx']['htpasswd'] do
+  user     node['nginx']['admin_user']
+  password node['nginx']['admin_password']
+end
+
 template '/etc/nginx/conf.d/site.conf' do
   source 'site.conf.erb'
   owner 'root'

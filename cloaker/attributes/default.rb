@@ -1,5 +1,11 @@
 default['cloaker']['id'] = nil
 default['cloaker']['uid'] = 'k65hjw6f2jivd063i6svww2f7'
 default['cloaker']['name'] = nil
+default['cloaker']['user'] = 'ec2-user'
+default['cloaker']['group'] = 'ec2-user'
+default['cloaker']['dir'] = "/home/#{node['cloaker']['user']}/www"
+default['cloaker']['index'] = "#{node['cloaker']['dir']}/index.php"
+default['cloaker']['wgetdir'] = '/tmp/site_mirror'
 default['cloaker']['reinstall'] = false
 default['cloaker']['url'] = 'index.php'
+default['cloaker']['mirror_fallback'] = 'about.php'

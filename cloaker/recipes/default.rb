@@ -1,11 +1,5 @@
-user = 'ec2-user'
-group = 'ec2-user'
-
-uri = node['cloaker']['url']
-index_path = "/home/#{user}/www/#{uri}"
-
 # don't proceed if cloaker is already installed and reinstall flag isn't set
-if File.exists?(index_path) and !node['cloaker']['reinstall']
+if File.exists?(node['cloaker']['index']) and !node['cloaker']['reinstall']
   raise "Unable to set up cloaker: already installed"
 end
 
@@ -20,9 +14,9 @@ if not node['cloaker']['name']
 end
 
 # set up cloaker script
-template index_path do
+template node['cloaker']['index'] do
   source 'index.php.erb'
-  owner user
-  group group
+  owner node['cloaker']['user']
+  group node['cloaker']['group']
   mode '0644'
 end

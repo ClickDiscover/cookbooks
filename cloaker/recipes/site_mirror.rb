@@ -6,8 +6,8 @@ if node['cloaker']['url']
   end
 
   # rename index.php if it exists in the downloaded data
-  if File.exist?("#{node['cloaker']['wgetdir']}/index.php")
-    execute "/bin/mv #{node['cloaker']['wgetdir']}/index.php #{node['cloaker']['wgetdir']}/index.php.remote"
+  if File.exist?("#{node['cloaker']['wgetdir']}/index.html")
+    execute "/bin/mv #{node['cloaker']['wgetdir']}/index.php #{node['cloaker']['wgetdir']}/#{node['cloaker']['mirror_fallback']}"
   end
 
   # copy contents of the tmp directory to web server root

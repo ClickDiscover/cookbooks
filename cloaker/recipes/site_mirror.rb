@@ -29,6 +29,15 @@ if node['cloaker']['url']
     execute "mv #{node['cloaker']['wgetdir']}/index.php #{node['cloaker']['wgetdir']}/#{node['cloaker']['mirror_fallback']}"
   end
 
+  # rename *.php.html files to *.html
+  require 'find'
+  Find.find(node['cloaker']['wgetdir']) do |path|
+    if path.end_with?('php.html')
+      newpath = path.sub(/\.php\.html$/, '.html')
+      execute "mv #{path} #{newpath}"
+    end
+  end
+
   # copy contents of tmp directory to web server root
   execute "rsync -a #{node['cloaker']['wgetdir']}/ #{node['cloaker']['dir']}/"
 

@@ -4,7 +4,7 @@ www_dir = "/srv/www"
 centrifuge = "#{www_dir}/centrifuge"
 centrifuge_landers = "#{www_dir}/centrifuge_landers"
 
-lockfile = '/var/lib/aws/opsworks/lockrun.lock'
+stage2_pid = '/var/lib/aws/opsworks/cache.stage2/chef-client-running.pid'
 deploy_json = '/tmp/deploy.json'
 deploy_setup_log = '/tmp/deploy_setup.log'
 chef_client = '/opt/aws/opsworks/current/bin/chef-client'
@@ -33,13 +33,13 @@ log 'message' do
   level :info
 end
 
-# rename the lock file so another copy of chef can run
-File.rename(lockfile, "#{lockfile}.backup")
+# rename the pid file so another copy of chef can run
+execute "mv #{stage2_pid} #{stage2_pid}.backup"
 
 execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c #{stage2} -o #{stage2_cmd}"
 
-# rename the lock file back
-File.rename("#{lockfile}.backup", lockfile)
+# rename the pid file back
+execute "mv #{stage2_pid}.backup #{stage2_pid}"
 
 # remove temporary json file
 file deploy_json do

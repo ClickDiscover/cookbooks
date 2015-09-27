@@ -27,3 +27,6 @@ default[:centrifuge][:hashids][:salt] = 'Quickpop sop. Flagship Salt.'
 default[:aerospike][:host] = nil
 default[:aerospike][:port] = nil
 default[:aerospike][:namespace] = nil
+
+# run setup
+default['setup']['stage2_cmd'] = 'opsworks_rubygems,nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'

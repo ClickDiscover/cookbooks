@@ -22,7 +22,7 @@ execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup'
 execute "mv #{node['setup']['stage2_pid']}.backup #{node['setup']['stage2_pid']}"
 
 # remove temporary json file
-file deploy_json do
+file node['setup']['json'] do
   action :delete
 end
 

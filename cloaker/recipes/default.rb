@@ -19,4 +19,5 @@ template node['cloaker']['index'] do
   owner node['cloaker']['user']
   group node['cloaker']['group']
   mode '0644'
+  force_unlink true
 end

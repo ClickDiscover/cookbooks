@@ -25,7 +25,7 @@ if node['cloaker']['url']
   end
 
   # rename index.php if it exists in downloaded data
-  if File.exist?("#{node['cloaker']['wgetdir']}/index.html")
+  if File.exist?("#{node['cloaker']['wgetdir']}/index.php")
     execute "mv #{node['cloaker']['wgetdir']}/index.php #{node['cloaker']['wgetdir']}/#{node['cloaker']['mirror_fallback']}"
   end
 

@@ -34,7 +34,7 @@ if node['cloaker']['url']
     command <<-EOH
       for path in `find #{node['cloaker']['wgetdir']} -name '*.php.html'`; do
         newpath=`echo $path | sed -e 's/\.php\.html$/\.html/'`
-        mv #{node['cloaker']['wgetdir']}/$path #{node['cloaker']['wgetdir']}/$newpath
+        mv $path $newpath
       done
     EOH
   end

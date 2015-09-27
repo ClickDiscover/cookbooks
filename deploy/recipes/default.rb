@@ -25,7 +25,7 @@ end
 execute "#{node['deploy']['chef_client']} --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c #{node['deploy']['stage2']} -o #{node['deploy']['stage2_cmd']}"
 
 # remove temporary json file
-file deploy_json do
+file "#{node['deploy']['json']}" do
   action :delete
 end
 

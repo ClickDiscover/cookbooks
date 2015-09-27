@@ -27,13 +27,3 @@ default[:centrifuge][:hashids][:salt] = 'Quickpop sop. Flagship Salt.'
 default[:aerospike][:host] = nil
 default[:aerospike][:port] = nil
 default[:aerospike][:namespace] = nil
-
-default['deploy']['json'] = '/tmp/deploy.json'
-default['deploy']['setup_log'] = '/tmp/deploy_setup.log'
-default['deploy']['chef_client'] = '/opt/aws/opsworks/current/bin/chef-client'
-# update custom cookbooks
-default['deploy']['stage1'] = '/var/lib/aws/opsworks/client.stage1.rb'
-default['deploy']['stage1_cmd'] = 'opsworks_custom_cookbooks::update,opsworks_custom_cookbooks::load,opsworks_custom_cookbooks::execute'
-# setup
-default['deploy']['stage2'] = '/var/lib/aws/opsworks/client.stage2.rb'
-default['deploy']['stage2_cmd'] = 'nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'

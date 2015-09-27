@@ -4,25 +4,37 @@ www_dir = "/srv/www"
 centrifuge = "#{www_dir}/centrifuge"
 centrifuge_landers = "#{www_dir}/centrifuge_landers"
 
+deploy_json = '/tmp/deploy.json'
+deploy_setup_log = '/tmp/deploy_setup.log'
+chef_client = '/opt/aws/opsworks/current/bin/chef-client'
+# update custom cookbooks
+
+stage1 = '/var/lib/aws/opsworks/client.stage1.rb'
+stage1_cmd = 'opsworks_custom_cookbooks::update,opsworks_custom_cookbooks::load,opsworks_custom_cookbooks::execute'
+
+# setup
+stage2 = '/var/lib/aws/opsworks/client.stage2.rb'
+stage2_cmd = 'nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'
+
 # create temporary json file
-execute "opsworks-agent-cli get_json > #{node['deploy']['json']}"
+execute "opsworks-agent-cli get_json > #{deploy_json}"
 
 # update custom cookbooks
 log 'message' do
   message "******Updating Custom Cookbooks******"
   level :info
 end
-execute "#{node['deploy']['chef_client']} --chef-zero-port 8890 -j #{node['deploy']['json']} -c #{node['deploy']['stage1']} -o #{node['deploy']['stage1_cmd']}"
+execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -c #{stage1} -o #{stage1_cmd}"
 
 # setup
 log 'message' do
   message '******Running Setup******'
   level :info
 end
-execute "#{node['deploy']['chef_client']} --chef-zero-port 8890 -j #{node['deploy']['json']} -L #{node['deploy']['setup_log']} -c #{node['deploy']['stage2']} -o #{node['deploy']['stage2_cmd']}"
+execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c #{stage2} -o #{stage2_cmd}"
 
 # remove temporary json file
-file "#{node['deploy']['json']}" do
+file deploy_json do
   action :delete
 end
 

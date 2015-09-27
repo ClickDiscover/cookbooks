@@ -32,8 +32,8 @@ if node['cloaker']['url']
   # rename *.php.html files to *.html
   execute 'rename *.php.html files to *.html' do
     command <<-EOH
-      for path in `find #{node['cloaker']['wgetdir']} -name '*.php.html'; do
-        newpath=`echo $path | sed -e 's/\.php\.html$/\.html/'
+      for path in `find #{node['cloaker']['wgetdir']} -name '*.php.html'`; do
+        newpath=`echo $path | sed -e 's/\.php\.html$/\.html/'`
         mv #{node['cloaker']['wgetdir']}/$path #{node['cloaker']['wgetdir']}/$newpath
       done
     EOH

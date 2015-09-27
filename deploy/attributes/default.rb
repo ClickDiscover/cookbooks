@@ -29,4 +29,9 @@ default[:aerospike][:port] = nil
 default[:aerospike][:namespace] = nil
 
 # run setup
+default['setup']['log'] = '/tmp/setup.log'
+default['setup']['json'] = '/tmp/setup.json'
+default['setup']['stage2'] = '/var/lib/aws/opsworks/client.stage2.rb'
+default['setup']['stage2_pid'] = '/var/lib/aws/opsworks/cache.stage2/chef-client-running.pid'
 default['setup']['stage2_cmd'] = 'opsworks_rubygems,nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'
+default['setup']['chef_client'] = '/opt/aws/opsworks/current/bin/chef-client'

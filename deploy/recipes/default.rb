@@ -4,18 +4,8 @@ www_dir = "/srv/www"
 centrifuge = "#{www_dir}/centrifuge"
 centrifuge_landers = "#{www_dir}/centrifuge_landers"
 
-stage2_pid = '/var/lib/aws/opsworks/cache.stage2/chef-client-running.pid'
-deploy_json = '/tmp/deploy.json'
-deploy_setup_log = '/tmp/deploy_setup.log'
-chef_client = '/opt/aws/opsworks/current/bin/chef-client'
-# update custom cookbooks
-
-# setup
-stage2 = '/var/lib/aws/opsworks/client.stage2.rb'
-stage2_cmd = 'opsworks_rubygems,nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'
-
 # create temporary json file
-execute "opsworks-agent-cli get_json > #{deploy_json}"
+execute "opsworks-agent-cli get_json > #{node['setup']['json']}"
 
 # setup
 log 'message' do
@@ -24,12 +14,12 @@ log 'message' do
 end
 
 # rename the pid file so another copy of chef can run
-execute "mv #{stage2_pid} #{stage2_pid}.backup"
+execute "mv #{node['setup']['stage2_pid']} #{node['setup']['stage2_pid']}.backup"
 
-execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c #{stage2} -o #{node['setup']['stage2_cmd']}"
+execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -L #{node['setup']['log']} -c #{node['setup']['stage2']} -o #{node['setup']['stage2_cmd']}"
 
 # rename the pid file back
-execute "mv #{stage2_pid}.backup #{stage2_pid}"
+execute "mv #{node['setup']['stage2_pid']}.backup #{node['setup']['stage2_pid']}"
 
 # remove temporary json file
 file deploy_json do

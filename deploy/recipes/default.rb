@@ -18,7 +18,7 @@ log 'message' do
   message '******Running Setup******'
   level :info
 end
-execute "/opt/aws/opsworks/current/bin/chef-client --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c /var/lib/aws/opsworks/client.stage1.rb -o nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike"
+execute "/opt/aws/opsworks/current/bin/chef-client --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c /var/lib/aws/opsworks/client.stage2.rb -o nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike"
 
 file deploy_json do
   action :delete

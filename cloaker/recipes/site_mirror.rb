@@ -31,11 +31,14 @@ if node['cloaker']['url']
 
   # rename *.php.html files to *.html
   require 'find'
-  Find.find(node['cloaker']['wgetdir']) do |path|
-    if path.end_with?('php.html')
-      newpath = path.sub(/\.php\.html$/, '.html')
-      execute "mv #{path} #{newpath}"
+  begin
+    Find.find(node['cloaker']['wgetdir']) do |path|
+      if path.end_with?('php.html')
+        newpath = path.sub(/\.php\.html$/, '.html')
+        execute "mv #{path} #{newpath}"
+      end
     end
+  rescue Errno::ENOENT
   end
 
   # copy contents of tmp directory to web server root

@@ -10,22 +10,12 @@ deploy_setup_log = '/tmp/deploy_setup.log'
 chef_client = '/opt/aws/opsworks/current/bin/chef-client'
 # update custom cookbooks
 
-stage1 = '/var/lib/aws/opsworks/client.stage1.rb'
-stage1_cmd = 'opsworks_custom_cookbooks::update,opsworks_custom_cookbooks::load,opsworks_custom_cookbooks::execute'
-
 # setup
 stage2 = '/var/lib/aws/opsworks/client.stage2.rb'
 stage2_cmd = 'opsworks_rubygems,nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'
 
 # create temporary json file
 execute "opsworks-agent-cli get_json > #{deploy_json}"
-
-# update custom cookbooks
-#log 'message' do
-#  message "******Updating Custom Cookbooks******"
-#  level :info
-#end
-#execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -c #{stage1} -o #{stage1_cmd}"
 
 # setup
 log 'message' do

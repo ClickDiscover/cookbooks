@@ -30,15 +30,13 @@ if node['cloaker']['url']
   end
 
   # rename *.php.html files to *.html
-  require 'find'
-  begin
-    Find.find(node['cloaker']['wgetdir']) do |path|
-      if path.end_with?('php.html')
-        newpath = path.sub(/\.php\.html$/, '.html')
-        execute "mv #{path} #{newpath}"
-      end
-    end
-  rescue Errno::ENOENT
+  execute 'rename *.php.html files to *.html' do
+    command <<-EOH
+      for path in `find #{node['cloaker']['wgetdir']} -name '*.php.html'; do
+        newpath=`echo $path | sed -e 's/\.php\.html$/\.html/'
+        mv #{node['cloaker']['wgetdir']}/$path #{node['cloaker']['wgetdir']}/$newpath
+      done
+    EOH
   end
 
   # copy contents of tmp directory to web server root

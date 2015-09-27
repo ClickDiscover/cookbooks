@@ -13,6 +13,12 @@ end
 execute "/usr/sbin/opsworks-agent-cli get_json > #{deploy_json}"
 execute "/opt/aws/opsworks/current/bin/chef-client --chef-zero-port 8890 -j #{deploy_json} -c /var/lib/aws/opsworks/client.stage1.rb -o opsworks_custom_cookbooks::update,opsworks_custom_cookbooks::load,opsworks_custom_cookbooks::execute"
 
+log 'message' do
+  message '******Running Setup******'
+  level :info
+end
+execute "/opt/aws/opsworks/current/bin/chef-client --chef-zero-port 8890 -j #{deploy_json} -c /var/lib/aws/opsworks/client.stage2.rb -o opsworks_initial_setup,ssh_host_keys,ssh_users,mysql::client,dependencies,ebs,opsworks_ganglia::client,opsworks_stack_state_sync,nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike,test_suite,opsworks_cleanup"
+
 file deploy_json do
   action :delete
 end

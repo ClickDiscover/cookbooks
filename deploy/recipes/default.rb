@@ -7,6 +7,13 @@ centrifuge_landers = "#{www_dir}/centrifuge_landers"
 # create temporary json file
 execute "opsworks-agent-cli get_json > #{node['setup']['json']}"
 
+# update custom cookbooks
+log 'message' do
+  message "******Updating Custom Cookbooks******"
+  level :info
+end
+execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -c #{node['setup']['stage1']} -o #{node['setup']['stage1_cmd']}"
+
 # setup
 log 'message' do
   message '******Running Setup******'

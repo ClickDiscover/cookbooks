@@ -4,6 +4,16 @@ www_dir = "/srv/www"
 centrifuge = "#{www_dir}/centrifuge"
 centrifuge_landers = "#{www_dir}/centrifuge_landers"
 
+# update custom cookbooks
+deploy_json = '/tmp/deploy.json'
+message "******Updating Custom Cookbooks******"
+execute "/usr/sbin/opsworks-agent-cli get_json > #{deploy_json}"
+execute "/opt/aws/opsworks/current/bin/chef-client -j #{deploy_json} -c /var/lib/aws/opsworks/client.stage1.rb -o opsworks_custom_cookbooks::update,opsworks_custom_cookbooks::load,opsworks_custom_cookbooks::execute"
+
+file deploy_json do
+  action :delete
+end
+
 # deploy applications
 node[:deploy].each do |application, deploy|
   opsworks_deploy_dir do

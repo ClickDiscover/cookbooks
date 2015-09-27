@@ -21,11 +21,11 @@ stage2_cmd = 'nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,ph
 execute "opsworks-agent-cli get_json > #{deploy_json}"
 
 # update custom cookbooks
-log 'message' do
-  message "******Updating Custom Cookbooks******"
-  level :info
-end
-execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -c #{stage1} -o #{stage1_cmd}"
+#log 'message' do
+#  message "******Updating Custom Cookbooks******"
+#  level :info
+#end
+#execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -c #{stage1} -o #{stage1_cmd}"
 
 # setup
 log 'message' do

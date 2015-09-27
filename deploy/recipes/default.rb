@@ -26,7 +26,7 @@ end
 # rename the pid file so another copy of chef can run
 execute "mv #{stage2_pid} #{stage2_pid}.backup"
 
-execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c #{stage2} -o #{stage2_cmd}"
+execute "#{chef_client} --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c #{stage2} -o #{node['deploy']['stage2_cmd']}"
 
 # rename the pid file back
 execute "mv #{stage2_pid}.backup #{stage2_pid}"

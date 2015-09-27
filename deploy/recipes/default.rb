@@ -4,8 +4,8 @@ www_dir = "/srv/www"
 centrifuge = "#{www_dir}/centrifuge"
 centrifuge_landers = "#{www_dir}/centrifuge_landers"
 
-deploy_json = node['deploy']['json']
-deploy_setup_log = node['deploy']['setup_log']
+deploy_json = "#{node['deploy']['json']}"
+deploy_setup_log = "#{node['deploy']['setup_log']}"
 
 # create temporary json file
 execute "opsworks-agent-cli get_json > #{deploy_json}"
@@ -25,7 +25,7 @@ end
 execute "#{node['deploy']['chef_client']} --chef-zero-port 8890 -j #{deploy_json} -L #{deploy_setup_log} -c #{node['deploy']['stage2']} -o #{node['deploy']['stage2_cmd']}"
 
 # remove temporary json file
-file "#{node['deploy']['json']}" do
+file "#{deploy_json}" do
   action :delete
 end
 

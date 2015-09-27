@@ -11,3 +11,6 @@ depends           'route53'
 depends           'sslmate'
 depends           'collectd'
 depends           'htpasswd'
+
+# https://supermarket.chef.io/cookbooks/yum
+depends           'yum'

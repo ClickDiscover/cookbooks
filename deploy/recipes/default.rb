@@ -15,7 +15,7 @@ stage1_cmd = 'opsworks_custom_cookbooks::update,opsworks_custom_cookbooks::load,
 
 # setup
 stage2 = '/var/lib/aws/opsworks/client.stage2.rb'
-stage2_cmd = 'nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'
+stage2_cmd = 'dependencies,nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'
 
 # create temporary json file
 execute "opsworks-agent-cli get_json > #{deploy_json}"

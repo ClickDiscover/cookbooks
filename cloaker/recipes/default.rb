@@ -13,26 +13,41 @@ if not node['cloaker']['name']
   raise "Unable to set up cloaker: name isn't set"
 end
 
-# recreate cloaker directory
+# cloaker installation paths
+cloaker_dirs = []
+cloaker_paths = []
+
+if node['cloaker']['install_root'] then
+  cloaker_dirs.push(node['cloaker']['install_root'])
+  cloaker_paths.push(node['cloaker']['index'])
+end
+if node['cloaker']['cloaker_directory'] then
+  claoker_dirs.push("#{node['cloaker']['dir']}/#{node['cloaker']['cloaker_directory']}")
+  cloaker_paths.push("#{cloaker_dir}/index.php")
+end
+
+# remove www root
 directory node['cloaker']['dir'] do
   action :delete
   recursive true
 end
-directory node['cloaker']['dir'] do
-  owner node['cloaker']['user']
-  group node['cloaker']['group']
-  mode '0755'
-  action :create
-  recursive true
+# create cloaker dirs
+cloaker_dirs.each do |dir|
+  directory dir do
+    owner node['cloaker']['user']
+    group node['cloaker']['group']
+    mode '0755'
+    action :create
+    recursive true
+  end
 end
 
-log "Debug: #{node['cloaker']['index']}"
-log "Debug: #{node['cloaker']['dir']}"
-
-# set up cloaker script
-template node['cloaker']['index'] do
-  source 'index.php.erb'
-  owner node['cloaker']['user']
-  group node['cloaker']['group']
-  mode '0644'
+# install cloaker script
+cloaker_paths.each do |path|
+  template path do
+    source 'index.php.erb'
+    owner node['cloaker']['user']
+    group node['cloaker']['group']
+    mode '0644'
+  end
 end

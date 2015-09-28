@@ -6,9 +6,10 @@ if node['cloaker']['url']
     timeout node['cloaker']['mirror_timeout']
   end
 
-  # rename index.php if it exists in downloaded data
-  if File.exist?("#{node['cloaker']['wgetdir']}/index.php")
-    execute "mv #{node['cloaker']['wgetdir']}/index.php #{node['cloaker']['wgetdir']}/#{node['cloaker']['mirror_fallback']}"
+  # remove cloaker's index.php if there's index.hmtl in downloaded data
+  if File.exist?("#{node['cloaker']['wgetdir']}/index.html")
+    execute "mv -f #{node['cloaker']['index']} #{node['cloaker']['dir']}/#{node['cloaker']['mirror_fallback']}"
+    only_if "test -e #{node['cloaker']['index']}"
   end
 
   # rename *.php.html files to *.html

@@ -7,7 +7,9 @@ if node['cloaker']['url']
   end
 
   # remove cloaker's index.php if there's index.html in downloaded data
+  log "Debug1: test -e #{node['cloaker']['wgetdir']}/index.html"
   if File.exist?("#{node['cloaker']['wgetdir']}/index.html")
+    log "Debug2: test -e #{node['cloaker']['index']}"
     execute "mv -f #{node['cloaker']['index']} #{node['cloaker']['dir']}/#{node['cloaker']['mirror_fallback']}"
     only_if "test -e #{node['cloaker']['index']}"
   end

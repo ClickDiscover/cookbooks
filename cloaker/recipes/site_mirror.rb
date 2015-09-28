@@ -1,6 +1,6 @@
 if node['cloaker']['url']
   # download URL
-  execute "wget --timeout=10 -mkEpnp -nH -q -P #{node['cloaker']['wgetdir']} -e robots=off #{node['cloaker']['url']} || /bin/true" do
+  execute "wget --timeout=10 -mkEpnp -nH -q -P #{node['cloaker']['wgetdir']} -e robots=off #{node['cloaker']['url']} || true" do
     user node['cloaker']['user']
     group node['cloaker']['group']
     timeout node['cloaker']['mirror_timeout']

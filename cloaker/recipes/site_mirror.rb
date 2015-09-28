@@ -6,7 +6,7 @@ if node['cloaker']['url']
     timeout node['cloaker']['mirror_timeout']
   end
 
-  # remove cloaker's index.php if there's index.hmtl in downloaded data
+  # remove cloaker's index.php if there's index.html in downloaded data
   if File.exist?("#{node['cloaker']['wgetdir']}/index.html")
     execute "mv -f #{node['cloaker']['index']} #{node['cloaker']['dir']}/#{node['cloaker']['mirror_fallback']}"
     only_if "test -e #{node['cloaker']['index']}"
@@ -20,6 +20,18 @@ if node['cloaker']['url']
         mv $path $newpath
       done
     EOH
+  end
+
+  # check if downloaded data overlaps with cloaker
+  if node['cloaker']['cloaker_directory'] then
+    execute "rm -rf #{node['cloaker']['wgetdir']}/#{node['cloaker']['cloaker_directory']}" do
+      only_if "test -e #{node['cloaker']['wgetdir']}/#{node['cloaker']['cloaker_directory']}"
+    end
+  end
+  if node['cloaker']['install_root'] then
+    execute "rm -rf #{node['cloaker']['wgetdir']}/index.php" do
+      only_if "test -e #{node['cloaker']['wgetdir']}/index.php"
+    end
   end
 
   # copy contents of tmp directory to web server root

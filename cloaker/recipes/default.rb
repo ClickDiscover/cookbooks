@@ -13,6 +13,19 @@ if not node['cloaker']['name']
   raise "Unable to set up cloaker: name isn't set"
 end
 
+# recreate cloaker directory
+directory node['cloaker']['dir'] do
+  action :delete
+  recursive true
+end
+directory node['cloaker']['dir'] do
+  owner node['cloaker']['user']
+  group node['cloaker']['group']
+  mode '0755'
+  action :create
+  recursive true
+end
+
 # set up cloaker script
 template node['cloaker']['index'] do
   source 'index.php.erb'

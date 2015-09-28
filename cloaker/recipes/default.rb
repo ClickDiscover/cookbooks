@@ -26,6 +26,9 @@ directory node['cloaker']['dir'] do
   recursive true
 end
 
+log "Debug: #{node['cloaker']['index']}"
+log "Debug: #{node['cloaker']['dir']}"
+
 # set up cloaker script
 template node['cloaker']['index'] do
   source 'index.php.erb'

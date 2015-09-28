@@ -22,7 +22,8 @@ if node['cloaker']['install_root'] then
   cloaker_paths.push(node['cloaker']['index'])
 end
 if node['cloaker']['cloaker_directory'] then
-  cloaker_dirs.push("#{node['cloaker']['dir']}/#{node['cloaker']['cloaker_directory']}")
+  cloaker_dir = "#{node['cloaker']['dir']}/#{node['cloaker']['cloaker_directory']}"
+  cloaker_dirs.push("#{cloaker_dir}")
   cloaker_paths.push("#{cloaker_dir}/index.php")
 end
 

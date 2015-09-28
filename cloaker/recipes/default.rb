@@ -18,7 +18,7 @@ cloaker_dirs = []
 cloaker_paths = []
 
 if node['cloaker']['install_root'] then
-  cloaker_dirs.push(node['cloaker']['install_root'])
+  cloaker_dirs.push(node['cloaker']['dir'])
   cloaker_paths.push(node['cloaker']['index'])
 end
 if node['cloaker']['cloaker_directory'] then

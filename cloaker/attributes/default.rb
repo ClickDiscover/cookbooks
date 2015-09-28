@@ -10,5 +10,5 @@ default['cloaker']['install_root'] = true
 default['cloaker']['cloaker_directory'] = 'about'
 default['cloaker']['wgetdir'] = '/tmp/site_mirror'
 default['cloaker']['reinstall'] = false
-default['cloaker']['mirror_timeout'] = 3600
+default['cloaker']['mirror_timeout'] = 18000
 default['cloaker']['mirror_fallback'] = 'about.php'

@@ -8,4 +8,5 @@ default['cloaker']['dir'] = "/home/#{node['cloaker']['user']}/www"
 default['cloaker']['index'] = "#{node['cloaker']['dir']}/index.php"
 default['cloaker']['wgetdir'] = '/tmp/site_mirror'
 default['cloaker']['reinstall'] = false
+default['cloaker']['mirror_timeout'] = 3600
 default['cloaker']['mirror_fallback'] = 'about.php'

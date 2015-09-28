@@ -22,6 +22,7 @@ if node['cloaker']['url']
   execute "wget --timeout=10 -mkEpnp -nH -q -P #{node['cloaker']['wgetdir']} -e robots=off #{node['cloaker']['url']} || /bin/true" do
     user node['cloaker']['user']
     group node['cloaker']['group']
+    timeout node['cloaker']['mirror_timeout']
   end
 
   # rename index.php if it exists in downloaded data

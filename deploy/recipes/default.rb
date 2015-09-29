@@ -1,3 +1,4 @@
+require 'aws-sdk'
 include_recipe 'deploy'
 
 www_dir = "/srv/www"

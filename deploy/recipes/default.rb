@@ -8,17 +8,11 @@ centrifuge_landers = "#{www_dir}/centrifuge_landers"
 execute "opsworks-agent-cli get_json > #{node['setup']['json']}"
 
 # update custom cookbooks
-log 'message' do
-  message "******Updating Custom Cookbooks******"
-  level :info
-end
+log '******Updating Custom Cookbooks******'
 execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -c #{node['setup']['stage1']} -o #{node['setup']['stage1_cmd']}"
 
 # setup
-log 'message' do
-  message '******Running Setup******'
-  level :info
-end
+log '******Running Setup******'
 
 # rename the pid file so another copy of chef can run
 execute "mv #{node['setup']['stage2_pid']} #{node['setup']['stage2_pid']}.backup"

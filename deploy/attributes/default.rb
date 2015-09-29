@@ -38,4 +38,4 @@ default['setup']['stage1_cmd'] = 'opsworks_custom_cookbooks::update,opsworks_cus
 default['setup']['stage2_cmd'] = 'opsworks_rubygems,nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'
 default['setup']['chef_client'] = '/opt/aws/opsworks/current/bin/chef-client'
 default['setup']['access_key'] = nil
-default['setup']['secret_access_key'] = nil
+default['setup']['secret_key'] = nil

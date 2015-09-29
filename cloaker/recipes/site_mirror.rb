@@ -19,7 +19,11 @@ if node['cloaker']['url']
           newpath=`echo $path | sed -e 's/\.#{ext}\.html$/\.html/'`
           mv $path $newpath
         done
-        find #{node['cloaker']['wgetdir']} -type f -exec echo {} && sed -i 's/\.#{ext}\.html$/\.html/' {} \\;
+
+        for path in `find #{node['cloaker']['wgetdir']} -type f; do
+          echo $path
+          sed -i 's/\.#{ext}\.html$/\.html/' $path
+        done
       EOH
     end
   end

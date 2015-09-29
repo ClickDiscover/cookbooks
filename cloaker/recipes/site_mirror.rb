@@ -16,14 +16,11 @@ if node['cloaker']['url']
     execute "rename *.#{ext}.html files to *.html" do
       command <<-EOH
         for path in `find #{node['cloaker']['wgetdir']} -name '*.#{ext}.html'`; do
-          newpath=`echo $path | sed -e 's/\.#{ext}\.html$/\.html/'`
+          newpath=`echo $path | sed -e 's/\\.#{ext}\\.html$/\\.html/'`
           mv $path $newpath
         done
 
-        for path in `find #{node['cloaker']['wgetdir']} -type f`; do
-          echo $path >> /tmp/debug.log
-          sed -i 's/\.#{ext}\.html$/\.html/' $path
-        done
+        find #{node['cloaker']['wgetdir']} -type f -exec sed -i 's/\\.#{ext}\\.html/\\.html/' {} \\;
       EOH
     end
   end

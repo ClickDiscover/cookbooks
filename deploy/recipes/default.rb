@@ -37,11 +37,9 @@ if not node['setup']['force_deploy'] then
   log '******Running Deploy******'
 
   # override ['setup']['force_deploy'] attribute
-  j = ::JSON.parse(File.read(node['setup']['json']))
-  ::File.delete(node['setup']['json'])
+  j = ::JSON.parse(::File.read(node['setup']['json']))
   j['setup']['force_deploy'] = true
-  ::File.open(node['setup']['json'], 'w') do |f|
-    puts ::JSON.pretty_generate(j)
+  ::File.open('/tmp/123.json', 'w') do |f|
     f.write(::JSON.pretty_generate(j))
   end
 

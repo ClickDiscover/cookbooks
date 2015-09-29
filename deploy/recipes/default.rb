@@ -22,7 +22,7 @@ execute "opsworks-agent-cli get_json > #{node['setup']['json']}"
 
 # update custom cookbooks
 log '******Updating Custom Cookbooks******'
-execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -c #{node['setup']['stage1']} -o #{stage2_cmd}"
+execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -c #{node['setup']['stage1']} -o #{node['setup']['stage1_cmd']}"
 
 # setup
 log '******Running Setup******'
@@ -30,7 +30,7 @@ log '******Running Setup******'
 # rename the pid file so another copy of chef can run
 execute "mv #{node['setup']['stage2_pid']} #{node['setup']['stage2_pid']}.backup"
 
-execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -L #{node['setup']['log']} -c #{node['setup']['stage2']} -o #{node['setup']['stage2_cmd']}"
+execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -L #{node['setup']['log']} -c #{node['setup']['stage2']} -o #{stage2_cmd}"
 
 # rename the pid file back
 execute "mv #{node['setup']['stage2_pid']}.backup #{node['setup']['stage2_pid']}"

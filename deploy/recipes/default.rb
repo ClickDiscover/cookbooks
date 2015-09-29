@@ -53,7 +53,8 @@ if not node['setup']['force_deploy'] then
     ignore_failure true
   end
 else
-  # at this point, node['setup']['force_deploy'] should be set in node['setup']['json']
+  # at this point, node['setup']['force_deploy'] should be set in Chef JSON configuration (node['setup']['json'])
+
   # deploy applications
   node[:deploy].each do |application, deploy|
     opsworks_deploy_dir do

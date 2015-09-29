@@ -8,7 +8,7 @@ centrifuge_landers = "#{www_dir}/centrifuge_landers"
 # initialize OpsWorks API
 opsworks = AWS::OpsWorks::Client.new(
   access_key_id: node['setup']['access_key'],
-  secret_access_key: node['setup']['secret_access_key']
+  secret_access_key: node['setup']['secret_key']
 )
 
 log "Access Key: #{node['setup']['access_key']}"

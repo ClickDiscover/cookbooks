@@ -35,7 +35,6 @@ default['setup']['stage1'] = '/var/lib/aws/opsworks/client.stage1.rb'
 default['setup']['stage2'] = '/var/lib/aws/opsworks/client.stage2.rb'
 default['setup']['stage2_pid'] = '/var/lib/aws/opsworks/cache.stage2/chef-client-running.pid'
 default['setup']['stage1_cmd'] = 'opsworks_custom_cookbooks::update,opsworks_custom_cookbooks::load,opsworks_custom_cookbooks::execute'
-default['setup']['stage2_cmd'] = 'opsworks_rubygems,nginx,php-fpm,collectd,nginx::collectd,statsd,php-fpm::collectd,php-fpm::aerospike'
 default['setup']['chef_client'] = '/opt/aws/opsworks/current/bin/chef-client'
 default['setup']['access_key'] = nil
 default['setup']['secret_key'] = nil

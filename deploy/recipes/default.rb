@@ -11,12 +11,9 @@ opsworks = AWS::OpsWorks::Client.new(
   secret_access_key: node['setup']['secret_key']
 )
 
-log "Access Key: #{node['setup']['access_key']}"
-log "Secret Key: #{node['setup']['secret_key']}"
-
 opsworks_instance = opsworks.describe_instances('instance_ids' => [node['opsworks']['instance']['id']]).instances[0]
 opsworks_layer = opsworks.describe_layers('layer_ids' => [opsworks_instance.layer_ids[0]]).layers[0]
-stage2_cmd = opsworks_layer.custom_recipes.setup
+stage2_cmd = 'opsworks_rubygems,' + opsworks_layer.custom_recipes.setup.join(',')
 
 log "Stage2 commands: #{stage2_cmd}"
 
@@ -25,7 +22,7 @@ execute "opsworks-agent-cli get_json > #{node['setup']['json']}"
 
 # update custom cookbooks
 log '******Updating Custom Cookbooks******'
-execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -c #{node['setup']['stage1']} -o #{node['setup']['stage1_cmd']}"
+execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -c #{node['setup']['stage1']} -o #{stage2_cmd}"
 
 # setup
 log '******Running Setup******'

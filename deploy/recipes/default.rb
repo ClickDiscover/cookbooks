@@ -15,7 +15,7 @@ log "Access Key: #{node['setup']['access_key']}"
 log "Secret Key: #{node['setup']['secret_key']}"
 
 opsworks_instance = opsworks.describe_instances('instance_ids' => [node['opsworks']['instance']['id']]).instances[0]
-opsworks_layer = opsworks.describe_layers('layer_ids' => [opsworks_instance.layers_id[0]]).layers[0]
+opsworks_layer = opsworks.describe_layers('layer_ids' => [opsworks_instance.layer_ids[0]]).layers[0]
 stage2_cmd = opsworks_layer.custom_recipes.setup
 
 log "Stage2 commands: #{stage2_cmd}"

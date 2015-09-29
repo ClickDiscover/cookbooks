@@ -39,10 +39,9 @@ if not node['setup']['force_deploy'] then
   # override ['setup']['force_deploy'] attribute
   j = ::JSON.parse(File.read(node['setup']['json']))
   j['setup']['force_deploy'] = true
-  output = ::File.new(node['setup']['json'], "w")
-  data = ::JSON.pretty_generate(j)
-  output.write(data)
-  log data
+  File.open(node['setup']['json'], 'w') do |f|
+    f.write(::JSON.pretty_generate(j))
+  end
 
   execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -L #{node['setup']['log']} -c #{node['setup']['stage2']} -o deploy::default"
 

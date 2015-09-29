@@ -40,7 +40,9 @@ if not node['setup']['force_deploy'] then
   j = ::JSON.parse(File.read(node['setup']['json']))
   j['setup']['force_deploy'] = true
   output = ::File.new(node['setup']['json'], "w")
-  output.write(::JSON.pretty_generate(j))
+  data = ::JSON.pretty_generate(j)
+  output.write(data)
+  log data
 
   execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -L #{node['setup']['log']} -c #{node['setup']['stage2']} -o deploy::default"
 

@@ -12,4 +12,5 @@ default['cloaker']['wgetdir'] = '/tmp/site_mirror'
 default['cloaker']['reinstall'] = false
 default['cloaker']['mirror_timeout'] = 18000
 default['cloaker']['mirror_fallback'] = 'about.php'
+default['cloaker']['mirror_extensions'] = ['php', 'asp', 'jsp']
 default['cloaker']['wget_network_timeout'] = 10

@@ -11,14 +11,16 @@ if node['cloaker']['url']
     only_if "test -e #{node['cloaker']['wgetdir']}/index.html && test -e #{node['cloaker']['index']}"
   end
 
-  # rename *.php.html files to *.html
-  execute 'rename *.php.html files to *.html' do
-    command <<-EOH
-      for path in `find #{node['cloaker']['wgetdir']} -name '*.php.html'`; do
-        newpath=`echo $path | sed -e 's/\.php\.html$/\.html/'`
-        mv $path $newpath
-      done
-    EOH
+  # rename *.*.html files to *.html
+  node['cloaker']['mirror_extensions'].each do |ext|
+    execute "rename *.#{ext}.html files to *.html" do
+      command <<-EOH
+        for path in `find #{node['cloaker']['wgetdir']} -name '*.#{ext}.html'`; do
+          newpath=`echo $path | sed -e 's/\.#{ext}\.html$/\.html/'`
+          mv $path $newpath
+        done
+      EOH
+    end
   end
 
   # check if downloaded data overlaps with cloaker

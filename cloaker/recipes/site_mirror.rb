@@ -21,7 +21,7 @@ if node['cloaker']['url']
         done
 
         for path in `find #{node['cloaker']['wgetdir']} -type f`; do
-          echo $path
+          echo $path >> /tmp/debug.log
           sed -i 's/\.#{ext}\.html$/\.html/' $path
         done
       EOH

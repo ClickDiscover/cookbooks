@@ -40,6 +40,7 @@ if not node['setup']['force_deploy'] then
   j = ::JSON.parse(File.read(node['setup']['json']))
   j['setup']['force_deploy'] = true
   File.open(node['setup']['json'], 'w') do |f|
+    puts ::JSON.pretty_generate(j)
     f.write(::JSON.pretty_generate(j))
   end
 

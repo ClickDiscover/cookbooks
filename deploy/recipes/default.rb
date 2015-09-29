@@ -37,10 +37,13 @@ if not node['setup']['force_deploy'] then
   log '******Running Deploy******'
 
   # override ['setup']['force_deploy'] attribute
-  j = JSON.parse(File.read(node['setup']['json']))
-  j['setup']['force_deploy'] = true
-  output = File.new(node['setup']['json'], "w")
-  output.write(JSON.pretty_generate(j))
+  begin
+    j = JSON.parse(File.read(node['setup']['json']))
+    j['setup']['force_deploy'] = true
+    output = File.new(node['setup']['json'], "w")
+    output.write(JSON.pretty_generate(j))
+  rescue
+  end
 
   execute "#{node['setup']['chef_client']} --chef-zero-port 8890 -j #{node['setup']['json']} -L #{node['setup']['log']} -c #{node['setup']['stage2']} -o deploy::default"
 

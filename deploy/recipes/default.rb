@@ -14,11 +14,11 @@ opsworks = AWS::OpsWorks::Client.new(
 log "Access Key: #{node['setup']['access_key']}"
 log "Secret Key: #{node['setup']['Secret_key']}"
 
-opsworks_instance = opsworks.describe_instances('instance_ids' => [node['opsworks']['instance']['id']]).instances[0]
-opsworks_layer = opsworks.describe_layers('layer_ids' => [opsworks_instance.layers_id[0]]).layers[0]
-stage2_cmd = opsworks_layer.custom_recipes.setup
+#opsworks_instance = opsworks.describe_instances('instance_ids' => [node['opsworks']['instance']['id']]).instances[0]
+#opsworks_layer = opsworks.describe_layers('layer_ids' => [opsworks_instance.layers_id[0]]).layers[0]
+#stage2_cmd = opsworks_layer.custom_recipes.setup
 
-log "Stage2 commands: #{stage2_cmd}"
+#log "Stage2 commands: #{stage2_cmd}"
 
 # create temporary json file
 execute "opsworks-agent-cli get_json > #{node['setup']['json']}"

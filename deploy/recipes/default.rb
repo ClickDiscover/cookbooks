@@ -10,7 +10,7 @@ opsworks = AWS::OpsWorks::Client.new(
   access_key_id: node['setup']['access_key'],
   secret_access_key: node['setup']['secret_access_key']
 )
-stage2_cmd = opsworks.describe_layers('layer_ids' => [node['opsworks']['id']]).layers[0].custom_recipes.setup
+stage2_cmd = opsworks.describe_layers('layer_ids' => [node['opsworks']['instance']['id']]).layers[0].custom_recipes.setup
 
 log "Stage2 commands: #{stage2_cmd}"
 

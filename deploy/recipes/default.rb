@@ -4,6 +4,15 @@ www_dir = "/srv/www"
 centrifuge = "#{www_dir}/centrifuge"
 centrifuge_landers = "#{www_dir}/centrifuge_landers"
 
+# initialize OpsWorks API
+opsworks = AWS::OpsWorks::Client.new(
+  access_key_id: node['setup']['access_key'],
+  secret_access_key: node['setup']['secret_access_key']
+)
+stage2_cmd = opsworks.describe_layers('layer_ids' => [node['opsworks']['id']]).layers[0].custom_recipes.setup
+
+log "Stage2 commands: #{stage2_cmd}"
+
 # create temporary json file
 execute "opsworks-agent-cli get_json > #{node['setup']['json']}"
 

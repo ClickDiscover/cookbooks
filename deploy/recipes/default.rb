@@ -38,8 +38,9 @@ if not node['setup']['force_deploy'] then
 
   # override ['setup']['force_deploy'] attribute
   j = ::JSON.parse(File.read(node['setup']['json']))
+  ::File.delete(node['setup']['json'])
   j['setup']['force_deploy'] = true
-  File.open(node['setup']['json'], 'w') do |f|
+  ::File.open(node['setup']['json'], 'w') do |f|
     puts ::JSON.pretty_generate(j)
     f.write(::JSON.pretty_generate(j))
   end

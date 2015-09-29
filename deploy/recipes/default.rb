@@ -1,4 +1,3 @@
-require 'json'
 require 'aws-sdk'
 include_recipe 'deploy'
 
@@ -40,10 +39,11 @@ if not node['setup']['force_deploy'] then
   script 'force deploy' do
     interpreter "ruby"
     code <<-EOH
-      j = JSON.parse(File.read(#{node['setup']['json']}))
+      require 'json'
+      j = JSON.parse(File.read('#{node['setup']['json']}'))
       j['setup']['force_deploy'] = true
       File.open('#{node['setup']['json']}', 'w') do |f|
-        f.write(::JSON.pretty_generate(j))
+        f.write(JSON.pretty_generate(j))
       end
     EOH
   end

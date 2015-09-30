@@ -1,7 +1,7 @@
 #
 cloaker_dir = node['cloaker']['uri'].split('/')[0...-1].join('/')
-cloaker_abs_dir = "#{['cloaker']['web_root']}/#{cloaker_dir}"
-cloaker_index = "#{['cloaker']['web_root']}/#{node['cloaker']['uri']}"
+cloaker_abs_dir = "#{node['cloaker']['web_root']}/#{cloaker_dir}"
+cloaker_index = "#{node['cloaker']['web_root']}/#{node['cloaker']['uri']}"
 
 # don't proceed if cloaker is already installed and reinstall flag isn't set
 if File.exists?(cloaker_index) and !node['cloaker']['reinstall']

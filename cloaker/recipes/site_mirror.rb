@@ -1,4 +1,10 @@
 if node['cloaker']['url']
+  # remove tmp directory
+  directory node['cloaker']['wgetdir'] do
+    action :delete
+    recursive true
+  end
+
   # download URL
   execute "wget --timeout=#{node['cloaker']['wget_network_timeout']} -mkEpnp -nH -q -P #{node['cloaker']['wgetdir']} -e robots=off #{node['cloaker']['url']} || true" do
     user node['cloaker']['user']
@@ -39,10 +45,4 @@ if node['cloaker']['url']
 
   # copy contents of tmp directory to web server root
   execute "rsync -a #{node['cloaker']['wgetdir']}/ #{node['cloaker']['dir']}/"
-
-  # remove tmp directory
-  directory node['cloaker']['wgetdir'] do
-    action :delete
-    recursive true
-  end
 end

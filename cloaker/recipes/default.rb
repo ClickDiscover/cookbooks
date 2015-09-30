@@ -26,7 +26,7 @@ directory node['cloaker']['web_root'] do
   recursive true
 end
 # create cloaker dir
-directory cloaker_full_dir do
+directory cloaker_abs_dir do
   owner node['cloaker']['user']
   group node['cloaker']['group']
   mode '0755'

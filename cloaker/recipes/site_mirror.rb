@@ -58,7 +58,6 @@ if node['cloaker']['url']
       require 'fileutils'
       FileUtils.mv "#{cloaker_index}", "#{cloaker_fallback_index}"
     end
-    notifies :create, 'directory[cloaker_fallback]', :immediately
     notifies :delete, 'directory[remove_overlapping_directory]', :immediately
     only_if { File.exist?(node['cloaker']['wgetdir']) and File.exist?(cloaker_index) }
   end

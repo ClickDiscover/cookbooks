@@ -1,7 +1,6 @@
 #
 if node['cloaker']['url']
   cloaker_dir = node['cloaker']['uri'].split('/')[0...-1].join('/')
-  cloaker_dir = '/' if cloaker_dir === ''
   cloaker_fallback_dir = node['cloaker']['fallback_uri'].split('/')[0...-1].join('/')
   # absolute cloaker directory, e.g. /home/ec2-user/www/about
   cloaker_abs_dir = "#{['cloaker']['web_root']}/#{cloaker_dir}"

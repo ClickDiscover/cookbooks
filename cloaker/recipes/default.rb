@@ -1,6 +1,5 @@
 #
 cloaker_dir = node['cloaker']['uri'].split('/')[0...-1].join('/')
-cloaker_dir = '/' if cloaker_dir === ''
 cloaker_abs_dir = "#{['cloaker']['web_root']}/#{cloaker_dir}"
 cloaker_index = "#{['cloaker']['web_root']}/#{node['cloaker']['uri']}"
 

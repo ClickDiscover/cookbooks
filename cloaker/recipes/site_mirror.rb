@@ -42,15 +42,17 @@ if node['cloaker']['url']
     recursive true
   end
 
-  # move cloaker's index.php to fallback_uri if there's index.html in downloaded data
+  # prepare fallback directory
   directory 'cloaker_fallback' do
     path "#{node['cloaker']['web_root']}/#{cloaker_fallback_dir}"
     owner node['cloaker']['user']
     group node['cloaker']['group']
     mode '0755'
     recursive true
-    action :nothing
+    action :create
   end
+
+  # move cloaker's index.php to fallback_uri if there's index.html in downloaded data
   ruby_block "move cloaker to fallback path" do
     block do
       require 'fileutils'

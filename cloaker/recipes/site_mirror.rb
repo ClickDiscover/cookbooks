@@ -1,4 +1,13 @@
+#
 if node['cloaker']['url']
+  cloaker_dir = node['cloaker']['uri'].split('/')[0...-1].join('/')
+  cloaker_fallback_dir = node['cloaker']['fallback_uri'].split('/')[0...-1].join('/')
+  # absolute cloaker directory, e.g. /home/ec2-user/www/about
+  cloaker_abs_dir = "#{['cloaker']['web_root']}/#{cloaker_dir}"
+  cloaker_index = "#{['cloaker']['web_root']}/#{node['cloaker']['uri']}"
+  cloaker_fallback_index = "#{['cloaker']['web_root']}/#{node['cloaker']['fallback_uri']}"
+  cloaker_index_noext = cloaker_index.reverse().split('.')[0...-1].join('.').reverse()
+
   # remove tmp directory
   directory node['cloaker']['wgetdir'] do
     action :delete
@@ -10,11 +19,6 @@ if node['cloaker']['url']
     user node['cloaker']['user']
     group node['cloaker']['group']
     timeout node['cloaker']['mirror_timeout']
-  end
-
-  # remove cloaker's index.php if there's index.html in downloaded data
-  execute "mv -f #{node['cloaker']['index']} #{node['cloaker']['dir']}/#{node['cloaker']['mirror_fallback']}" do
-    only_if "test -e #{node['cloaker']['wgetdir']}/index.html && test -e #{node['cloaker']['index']}"
   end
 
   # rename *.*.html files to *.html
@@ -31,18 +35,32 @@ if node['cloaker']['url']
     end
   end
 
-  # check if downloaded data overlaps with cloaker
-  if node['cloaker']['cloaker_directory'] then
-    execute "rm -rf #{node['cloaker']['wgetdir']}/#{node['cloaker']['cloaker_directory']}" do
-      only_if "test -e #{node['cloaker']['wgetdir']}/#{node['cloaker']['cloaker_directory']}"
-    end
+  # check if downloaded data overlaps with cloaker fallback uri
+  directory 'remove_overlapping_directory' do
+    path "#{node['cloaker']['wgetdir']}/#{cloaker_fallback_dir}"
+    action :nothing
+    recursive true
   end
-  if node['cloaker']['install_root'] then
-    execute "rm -rf #{node['cloaker']['wgetdir']}/index.php" do
-      only_if "test -e #{node['cloaker']['wgetdir']}/index.php"
+
+  # move cloaker's index.php to fallback_uri if there's index.html in downloaded data
+  directory 'cloaker_fallback' do
+    path "#{node['cloaker']['web_root']}/#{cloaker_fallback_dir}"
+    owner node['cloaker']['user']
+    group node['cloaker']['group']
+    mode '0755'
+    recursive true
+    action :nothing
+  end
+  ruby_block "move cloaker to fallback path" do
+    block do
+      require 'fileutils'
+      FileUtils.mv "#{cloaker_index}", "#{cloaker_fallback_index}"
     end
+    notifies :create, 'directory[cloaker_fallback]', :immediately
+    notified :delete, 'directory[remove_overlapping_directory]', :immediately
+    only_if { File.exist?(node['cloaker']['wgetdir']) and File.exist?(cloaker_index) }
   end
 
   # copy contents of tmp directory to web server root
-  execute "rsync -a #{node['cloaker']['wgetdir']}/ #{node['cloaker']['dir']}/"
+  execute "rsync -a #{node['cloaker']['wgetdir']}/ #{node['cloaker']['web_root']}/"
 end

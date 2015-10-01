@@ -59,7 +59,7 @@ if node['cloaker']['url']
       FileUtils.mv "#{cloaker_index}", "#{cloaker_fallback_index}"
     end
     notifies :delete, 'directory[remove_overlapping_directory]', :immediately
-    only_if { File.exist?(node['cloaker']['wgetdir']) and File.exist?(cloaker_index) }
+    only_if { File.exist?("#{node['cloaker']['wgetdir']}/index.html") and File.exist?(cloaker_index) }
   end
 
   # copy contents of tmp directory to web server root

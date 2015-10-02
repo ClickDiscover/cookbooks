@@ -12,3 +12,4 @@ default['cloaker']['wget_network_timeout'] = 10
 default['cloaker']['web_root'] = "/home/#{node['cloaker']['user']}/www"
 default['cloaker']['uri'] = '/index.php'
 default['cloaker']['fallback_uri'] = '/about/index.php'
+default['cloaker']['template'] = 'index.php.erb'

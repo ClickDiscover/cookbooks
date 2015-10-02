@@ -36,7 +36,7 @@ end
 
 # install cloaker script
 template cloaker_index do
-  source 'index.php.erb'
+  source node['cloaker']['template']
   owner node['cloaker']['user']
   group node['cloaker']['group']
   mode '0644'

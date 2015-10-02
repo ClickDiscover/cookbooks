@@ -5,4 +5,7 @@ license           'Unknown'
 description       'Issues SSL certs using sslmate'
 version           '0.0.2'
 recipe            'sslmate', 'Issues SSL certs'
+
+# http://supermarket.chef.io/cookbooks/yum
+depends           'yum'
 depends           'route53'

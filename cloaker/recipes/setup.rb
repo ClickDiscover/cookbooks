@@ -7,7 +7,7 @@ directory '/home/ec2-user' do
 end
 
 # ensure cloaker directory exists
-directory node['cloaker']['dir'] do
+directory node['cloaker']['web_root'] do
   owner node['cloaker']['user']
   group node['cloaker']['group']
   mode '0755'

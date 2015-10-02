@@ -13,3 +13,5 @@ default['cloaker']['web_root'] = "/home/#{node['cloaker']['user']}/www"
 default['cloaker']['uri'] = '/index.php'
 default['cloaker']['fallback_uri'] = '/about/index.php'
 default['cloaker']['template'] = 'index.php.erb'
+default['cloaker']['redirect_file'] = "#{node['cloaker']['web_root']}/external.php"
+default['cloaker']['cloaked_url'] = nil

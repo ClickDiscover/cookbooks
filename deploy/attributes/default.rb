@@ -17,7 +17,7 @@ default[:centrifuge][:content_repo] = 'centrifuge_landers'
 
 default[:centrifuge][:cache] = {
   'expiration' => 3600,
-  'adex_expiration' => 300,
+  'adex_expiration' => 60,
   'root' => '/tmp/centrifuge/'
 }
 

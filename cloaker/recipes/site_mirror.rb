@@ -21,7 +21,7 @@ if node['cloaker']['url']
     "--disable-security-limits -A#{node['cloaker']['httrack']['max_bytes_sec']}",
     "-E#{node['cloaker']['httrack']['max_timeout']} -T#{node['cloaker']['httrack']['link_timeout']}",
     "-C0 -N100",
-    if node['cloaker']['httrack']['enable_logging'] then "-Q" else "" end
+    if node['cloaker']['httrack']['enable_logging'] then "-z" else "-Q" end
   ].join(' ')
 
   execute download_cmd do

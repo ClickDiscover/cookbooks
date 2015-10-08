@@ -19,6 +19,7 @@ default['cloaker']['httrack'] = {
   'max_bytes_sec' => 1000000000,
   'max_timeout' => 1200, # about 80% of mirror_timeout
   'link_timeout' => 10,
+  'enable_logging' => false,
   'package' => 'https://s3-us-west-2.amazonaws.com/infrastructure.flagshippromotions.com/httrack-3.48.19-2.amzn1.x86_64.rpm'
 }
 

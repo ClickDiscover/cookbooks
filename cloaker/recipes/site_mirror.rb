@@ -20,7 +20,8 @@ if node['cloaker']['url']
     "-O #{node['cloaker']['wgetdir']}",
     "--disable-security-limits -A#{node['cloaker']['httrack']['max_bytes_sec']}",
     "-E#{node['cloaker']['httrack']['max_timeout']} -T#{node['cloaker']['httrack']['link_timeout']}",
-    "--do-not-log -C0 -N100"
+    "-C0 -N100",
+    if node['cloaker']['httrack']['enable_logging'] then "-Q" else "" end
   ].join(' ')
 
   execute download_cmd do

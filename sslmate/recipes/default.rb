@@ -7,8 +7,7 @@ yum_repository 'sslmate' do
 end
 
 # install SSLMate
-yum_package 'sslmate' do
-  action :install
+package 'sslmate' do
   flush_cache [ :before ]
 end
 

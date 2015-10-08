@@ -1,7 +1,5 @@
 # install nginx
-yum_package 'nginx' do
-  action :install
-end
+package 'nginx'
 
 # define nginx system service
 service 'nginx' do

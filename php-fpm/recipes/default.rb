@@ -6,9 +6,7 @@ if not ['5.4', '5.5', '5.6'].include?(version)
   Chef::Application.fatal!("Unsupported PHP-FPM version #{version}", 1)
 end
 
-yum_package "php#{package_version}-fpm" do
-  action :install
-end
+package "php#{package_version}-fpm"
 
 # define PHP-FPM system service
 service 'php-fpm' do

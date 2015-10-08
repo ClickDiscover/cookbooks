@@ -1,8 +1,17 @@
 # install httrack
-yum_package 'httrack' do
-  action :install
+httrack_file_name = node['cloaker']['httrack']['package'].split('/')[-1]
+
+remote_file "/tmp/#{httrack_file_name}" do
+  source node['cloaker']['httrack']['package']
+  action :create
 end
 
+package 'httrack' do
+  source "/tmp/#{httrack_file_name}"
+end
+
+# ensure rsync is instaled
+package 'rsync'
 
 # ensure /home/ec2-user directory exists and has correct permissions
 directory '/home/ec2-user' do

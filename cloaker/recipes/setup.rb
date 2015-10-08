@@ -1,3 +1,9 @@
+# install httrack
+yum_package 'httrack' do
+  action :install
+end
+
+
 # ensure /home/ec2-user directory exists and has correct permissions
 directory '/home/ec2-user' do
   mode '0755'

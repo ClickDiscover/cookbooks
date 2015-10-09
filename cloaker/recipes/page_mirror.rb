@@ -26,7 +26,7 @@ if node['cloaker']['safe_page']
     # "--convert-links",
     # "--adjust-extension",
     # "--force-directories",
-    "-E -H -k -K -p"
+    "-E -H -k -K -p",
     "--timeout=#{node['cloaker']['wget_network_timeout']}",
     "-nH -P #{node['cloaker']['wgetdir']}",
     node['cloaker']['safe_page']

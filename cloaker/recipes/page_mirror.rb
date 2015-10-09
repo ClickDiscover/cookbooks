@@ -27,7 +27,7 @@ if node['cloaker']['safe_page']
     "--adjust-extension",
     "--force-directories",
     "--timeout=#{node['cloaker']['wget_network_timeout']}",
-    "-P #{node['cloaker']['wgetdir']}",
+    "-nH -P #{node['cloaker']['wgetdir']}",
     node['cloaker']['safe_page']
   ].join(' ')
 

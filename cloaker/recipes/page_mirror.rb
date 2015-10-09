@@ -53,7 +53,7 @@ if node['cloaker']['safe_page']
   ruby_block "copy cloaker to fallback path" do
     block do
       require 'fileutils'
-      FileUtils.cp "#{cloaker_index}", "#{modified_uri}"
+      FileUtils.cp "#{cloaker_index}", "#{node['cloaker']['web_root']}/#{modified_uri}"
     end
   end
 end

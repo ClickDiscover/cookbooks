@@ -9,7 +9,7 @@ if node['cloaker']['safe_page']
   if modified_uri.split('.').count > 1
     modified_uri = modified_uri.split('.')[0] + '.php'
   else
-    modified_uri = modified_uri + 'index.php'
+    modified_uri = modified_uri + '/index.php'
   end
   modified_dir = modified_uri.split('/')[0...-1].join('/')
 

@@ -32,7 +32,7 @@ if node['cloaker']['safe_page']
     node['cloaker']['safe_page']
   ].join(' ')
 
-  execute "wget #{wget_params}" do
+  execute "wget #{wget_params} || true" do
     user node['cloaker']['user']
     group node['cloaker']['group']
     timeout node['cloaker']['mirror_timeout']

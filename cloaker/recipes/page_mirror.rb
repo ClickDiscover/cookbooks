@@ -22,13 +22,13 @@ if node['cloaker']['safe_page']
   # download URL
   wget_params = [
     "--quiet",
-    "--page-requisites",
+    # "--page-requisites",
     # "--convert-links",
     # "--adjust-extension",
     # "--force-directories",
-    "-E -H -k -K -p",
+    "-E -H -k -K -p -nH",
     "--timeout=#{node['cloaker']['wget_network_timeout']}",
-    "-nH -P #{node['cloaker']['wgetdir']}",
+    "-P #{node['cloaker']['wgetdir']}",
     node['cloaker']['safe_page']
   ].join(' ')
 

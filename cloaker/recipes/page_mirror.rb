@@ -42,11 +42,13 @@ if node['cloaker']['safe_page']
   execute "rsync -a #{node['cloaker']['wgetdir']}/ #{node['cloaker']['web_root']}/"
 
   # prepare fallback directory
-  ruby_block "copy cloaker to fallback path" do
-    block do
-      require 'fileutils'
-      FileUtils.cp "#{cloaker_index}", "#{node['cloaker']['web_root']}/#{cloaker_uri}"
-      FileUtils.cp "#{node['cloaker']['redirect_file']}", "#{node['cloaker']['web_root']}/#{external_uri}"
+  if safe_dir != ""
+    ruby_block "copy cloaker to fallback path" do
+      block do
+        require 'fileutils'
+        FileUtils.cp "#{cloaker_index}", "#{node['cloaker']['web_root']}/#{cloaker_uri}"
+        FileUtils.cp "#{node['cloaker']['redirect_file']}", "#{node['cloaker']['web_root']}/#{external_uri}"
+      end
     end
   end
 end

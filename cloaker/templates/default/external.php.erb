@@ -1,1 +1,14 @@
-<?php header("location: <%= node['cloaker']['cloaked_url'] %>"); ?>
+<?php
+
+$url = <%= node['cloaker']['cloaked_url'] %>;
+
+if (isset($_SERVER["QUERY_STRING"])) {
+  if (strpos($url, "?") !== false) {
+    $url .= "&" . $_SERVER["QUERY_STRING"];
+  } else {
+    $url .= "?" . $_SERVER["QUERY_STRING"];
+  }
+}
+
+header("location: {$url}");
+?>

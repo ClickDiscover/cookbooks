@@ -1,6 +1,6 @@
 name              'route53'
-maintainer        'FlagshipPromotions'
-maintainer_email  'maintainer@flagshoppromotions.com'
+maintainer        'ClickDiscover'
+maintainer_email  'maintainer@clickdiscover.io'
 license           'Unknown'
 description       'Manages Route53'
 version           '0.1.0'

@@ -1,6 +1,6 @@
 name              'nginx'
-maintainer        'FlagshipPromotions'
-maintainer_email  'maintainer@flagshoppromotions.com'
+maintainer        'ClickDiscover'
+maintainer_email  'maintainer@clickdiscover.io'
 license           'Unknown'
 description       'Configures nginx'
 version           '0.6'

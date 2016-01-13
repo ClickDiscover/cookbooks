@@ -1,6 +1,6 @@
 name              'sslmate'
-maintainer        'FlagshipPromotions'
-maintainer_email  'maintainer@flagshoppromotions.com'
+maintainer        'ClickDiscover'
+maintainer_email  'maintainer@clickdiscover.io'
 license           'Unknown'
 description       'Issues SSL certs using sslmate'
 version           '0.0.2'

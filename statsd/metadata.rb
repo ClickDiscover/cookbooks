@@ -1,6 +1,6 @@
 name              'statsd'
-maintainer        'FlagshipPromotions'
-maintainer_email  'maintainer@flagshoppromotions.com'
+maintainer        'ClickDiscover'
+maintainer_email  'maintainer@clickdiscover.io'
 license           'Unknown'
 description       'Configures statsd'
 version           '0.5'

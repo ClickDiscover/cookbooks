@@ -1,6 +1,6 @@
 name              'cloaker'
-maintainer        'FlagshipPromotions'
-maintainer_email  'maintainer@flagshoppromotions.com'
+maintainer        'ClickDiscover'
+maintainer_email  'maintainer@clickdiscover.io'
 license           'Unknown'
 description       'Deploys third-party cloaker php file through local REST service'
 version           '0.2.0'

@@ -34,25 +34,27 @@ template "/etc/logrotate.d/centrifuge" do
 end
 
 # configure Centrifuge
-template "#{centrifuge}/current/config.php" do
-  source 'version2.config.php.erb'
-  owner node[:opsworks][:deploy_user][:user]
-  group node[:opsworks][:deploy_user][:group]
-  mode '0644'
+if node[:deploy].has_key? :centrifuge
+  template "#{centrifuge}/current/config.php" do
+    source 'version2.config.php.erb'
+    owner node[:opsworks][:deploy_user][:user]
+    group node[:opsworks][:deploy_user][:group]
+    mode '0644'
 
-  deploy_db = node[:deploy][:centrifuge][:database]
-  db = {
-    'host' => deploy_db[:host],
-    'dbname' =>  deploy_db[:database],
-    'port' => deploy_db[:port],
-    'user' => deploy_db[:username],
-    'password' => deploy_db[:password]
-  }
-  db_str = db.map{|k,v| "#{k}=#{v}"}.join(';')
+    deploy_db = node[:deploy][:centrifuge][:database]
+    db = {
+      'host' => deploy_db[:host],
+      'dbname' =>  deploy_db[:database],
+      'port' => deploy_db[:port],
+      'user' => deploy_db[:username],
+      'password' => deploy_db[:password]
+    }
+    db_str = db.map{|k,v| "#{k}=#{v}"}.join(';')
 
-  variables({
-    :pdo_url => "pgsql:#{db_str}"
-  })
+    variables({
+      :pdo_url => "pgsql:#{db_str}"
+    })
+  end
 end
 
 # symlink static files
